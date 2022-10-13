@@ -28,7 +28,6 @@ These implements are:
 * Meowtillary/RigidBody2D.gd
 
 ### What you accomplished
-(Give a description of the features you added or tasks you accomplished. Provide some detail here. This section will be a little longer than the bulleted lists above) 
 I was able to implement the basic movement system for the main character, known as Squango for the time being. The user can move the character to the left
 and right using A and D, or the left and right arrow keys. The character will quickly slow to a stop when the button is not pressed. The character can
 also jump using the spacebar. Upon jumping, the character will shoot into the air and accelerate towards the gound until reaching a terminal velocity.
