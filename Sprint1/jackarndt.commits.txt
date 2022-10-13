@@ -1,0 +1,14 @@
+Meowtillary/RigidBody2d.gd
+
+func _attack():
+	$Sprite.play("Attack")
+	$punchSFX.play(.18)
+		
+func _jump():
+	$Sprite.play("Jump")
+	velocity.y = -450
+	$jumpSFX.play(.5)
+	
+func _die():
+	$deathSFX.play(.1)
+	$Sprite.play("Death")
