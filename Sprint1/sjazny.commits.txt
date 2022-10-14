@@ -1,0 +1,3 @@
+
+For my commit.txt file and everyone else's in the correct format, go to
+/commit_files
