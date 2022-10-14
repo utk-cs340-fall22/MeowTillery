@@ -1,14 +1,17 @@
-Meowtillary/RigidBody2d.gd
-
-func _attack():
-	$Sprite.play("Attack")
-	$punchSFX.play(.18)
-		
-func _jump():
-	$Sprite.play("Jump")
-	velocity.y = -450
-	$jumpSFX.play(.5)
-	
-func _die():
-	$deathSFX.play(.1)
-	$Sprite.play("Death")
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400  8) func _attack():
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400  9) 	$Sprite.play("Attack")
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 10) 	$punchSFX.play(.18)
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 11) 		
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 12) func _jump():
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 13) 	$Sprite.play("Jump")
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 14) 	velocity.y = -450
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 15) 	$jumpSFX.play(.5)
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 16) 	
+551891db (jackarndt   2022-10-13 00:41:51 -0400 17) func _die():
+551891db (jackarndt   2022-10-13 00:41:51 -0400 18) 	$deathSFX.play(.1)
+551891db (jackarndt   2022-10-13 00:41:51 -0400 19) 	$Sprite.play("Death")
+551891db (jackarndt   2022-10-13 00:41:51 -0400 20) 	
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 38) 		_jump()
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 41) 		_attack()
+551891db (jackarndt   2022-10-13 00:41:51 -0400 44) 		_die()
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 51) 
