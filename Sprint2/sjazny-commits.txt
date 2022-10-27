@@ -1,0 +1,139 @@
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400  1) extends Control
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400  2) 
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400  3) # Called when the node enters the scene tree for the first time.
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400  4) func _ready():
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400  5) 	pass # Replace with function body.
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400  6) 
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400  7) 
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400  8) func _on_Start_pressed():
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400  9) 	get_tree().change_scene("res://background_testing.tscn")
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 10) 	
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 11) 
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 12) func _on_Quit_pressed():
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 13) 	get_tree().quit()
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 14) 
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 15) 
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 16) func _on_Credits_pressed():
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 17) 	get_tree().change_scene("res://Credits.tscn")
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 18) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 19) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 20) func _on_Button_pressed():
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 21) 	pass
+
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 1) extends Node2D
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 2) 
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 3) func _on_Button_pressed():
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 4) 	get_tree().change_scene("res://Main_Menu.tscn")
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 5) 	
+
+9d2423e4 (Sonaz                   2022-10-24 19:08:57 -0400 1) extends Node2D
+344ec253 (Sonaz                   2022-10-27 11:41:42 -0400 2) export var damage = 0
+9d2423e4 (Sonaz                   2022-10-24 19:08:57 -0400 3) 
+9d2423e4 (Sonaz                   2022-10-24 19:08:57 -0400 4) func _on_Area2D_body_entered(body):
+
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  1) extends KinematicBody2D
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  2) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  3) var velocity = 40
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  4) var motion = Vector2()
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  5) var gravity = 50
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  6) var moving_left = true
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  7) onready var my_timer = get_node("Timer")
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  8) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  9) func _ready():
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 10) 	$AnimatedSprite.play("walk")
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 11) 	$Timer.wait_time = 9.0
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 12) 	$Timer.start()
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 13) 	$Timer.paused = false
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 14) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 15) # warning-ignore:unused_argument
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 16) func _physics_process(delta):	
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 17) 	if ($left_ray.is_colliding()):
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 18) 		moving_left = false
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 19) 		$AnimatedSprite.flip_h = true
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 20) 	if ($right_ray.is_colliding()):
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 21) 		moving_left = true
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 22) 		$AnimatedSprite.flip_h = false
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 23) 	
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 24) 	motion.y += gravity
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 25) 	if (moving_left == true):
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 26) 		motion.x = (-1 * velocity)
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 27) 	else:
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 28) 		motion.x = velocity
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 29) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 30) 	motion = move_and_slide(motion)
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 31) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 32) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 33) func _on_Timer_timeout():
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 34) 	var velocity_buff = velocity
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 35) 	velocity = 0
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 36) 	$AnimatedSprite.play("sit") # play sit animation
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 37) 	yield(get_tree().create_timer(1), "timeout") # stay in sit animation set time
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 38) 	$AnimatedSprite.play("idle") # play idle animation
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 39) 	yield(get_tree().create_timer(5), "timeout") #stay in idle animation for set time
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 40) 	$AnimatedSprite.play("stand") # play stand animation
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 41) 	yield(get_tree().create_timer(1), "timeout") # stay in stand animation for set time
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 42) 	$AnimatedSprite.play("walk") #go back to walk
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 43) 	velocity = velocity_buff
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 44) 	$Timer.start()
+
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  1) extends KinematicBody2D
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  2) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  3) var velocity = 25
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  4) var motion = Vector2()
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  5) var gravity = 50
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  6) var moving_left = true
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  7) onready var my_timer = get_node("Timer")
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  8) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400  9) func _ready():
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 10) 	$AnimatedSprite.play("walk")
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 11) 	$Timer.wait_time = 15.0
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 12) 	$Timer.start()
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 13) 	$Timer.paused = false
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 14) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 15) # warning-ignore:unused_argument
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 16) func _physics_process(delta):	
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 17) 	if ($left_ray.is_colliding()):
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 18) 		moving_left = false
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 19) 		$AnimatedSprite.flip_h = true
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 20) 	if ($right_ray.is_colliding()):
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 21) 		moving_left = true
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 22) 		$AnimatedSprite.flip_h = false
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 23) 	
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 24) 	motion.y += gravity
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 25) 	if (moving_left == true):
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 26) 		motion.x = (-1 * velocity)
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 27) 	else:
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 28) 		motion.x = velocity
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 29) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 30) 	motion = move_and_slide(motion)
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 31) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 32) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 33) func _on_Timer_timeout():
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 34) 	var velocity_buff = velocity
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 35) 	velocity = 0
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 36) 	$AnimatedSprite.play("sleep") # play sleep animation
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 37) 	yield(get_tree().create_timer(8), "timeout") # stay in sleep animation set time
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 38) 	$AnimatedSprite.play("wake") # play wake animation
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 39) 	yield(get_tree().create_timer(2), "timeout") #stay in wake animation for set time
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 40) 	$AnimatedSprite.play("idle") # play stand animation
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 41) 	yield(get_tree().create_timer(3), "timeout") 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 42) 	$AnimatedSprite.play("stand")
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 43) 	yield(get_tree().create_timer(1), "timeout") 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 44) 	$AnimatedSprite.play("walk") #go back to walk
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 45) 	velocity = velocity_buff
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 46) 	$Timer.start()
+
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 1) extends KinematicBody2D
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 2) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 3) var velocity = 40
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 4) var motion = Vector2()
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 5) var gravity = 50
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 6) var moving_left = true
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 7) 
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 8) func _ready():
+7cd0bc5c (Sonaz 2022-10-27 08:52:10 -0400 9) 	$AnimatedSprite.play("idle")
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 1) extends Node2D
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 2) 
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 3) func _on_Area2D_body_entered(body):
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 4) 	if body is RigidBody2D:
+9d2423e4 (Sonaz 2022-10-24 19:08:57 -0400 5) 		get_tree().change_scene("res://background_testing.tscn")
