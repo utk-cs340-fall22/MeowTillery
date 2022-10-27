@@ -1,0 +1,121 @@
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  3) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  9) const invincibility_duration = 1.5
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 10) onready var hurtbox = $Hurtbox
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 11) onready var blinker = $Blinker
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 12) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 13) var stats = PlayerStat
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 14) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 15) func _ready():
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 16) 	stats.connect("killed", self, "_die")
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 17) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 30) 	yield(get_tree().create_timer(2), "timeout")
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 31) 	get_tree().change_scene("res://Main_Menu.tscn")
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 64) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 65) func _on_Hurtbox_area_entered(area):
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 66) 	if !hurtbox.is_invincible:
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 67) 		blinker.start_blinking(self, invincibility_duration)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 68) 		hurtbox.start_invincibility(invincibility_duration)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 69) 		stats.health-=area.damage
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 70) 
+fbbfb277 (Sean Kerzel 2022-10-27 09:54:30 -0400 71) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 72) func _on_SanityBar_killed():
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 73) 	_die()
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400  1) extends Control
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400  2) 
+fbbfb277 (Sean Kerzel 2022-10-27 09:54:30 -0400  3) #onready var sanity_bar = $Sanity
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  4) signal killed()
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  5) 
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400  6) 
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400  7) func _on_Timer_timeout():
+fbbfb277 (Sean Kerzel 2022-10-27 09:54:30 -0400  8) 	if $Sanity.value == 0:
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  9) 		emit_signal("killed")
+fbbfb277 (Sean Kerzel 2022-10-27 09:54:30 -0400 10) 	$Sanity.value-=1
+fbbfb277 (Sean Kerzel 2022-10-27 09:54:30 -0400 11) 
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400  1) extends Control
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400  2) 
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400  3) onready var health_bar = $Health
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400  4) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  5) func _ready():
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  6) 	PlayerStat.connect("health_updated", self, "_health_update")
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  7) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  8) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  9) func _health_update(health):
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400 10) 	health_bar.value = health
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400 11) 
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400 12) func _max_health_update(max_health):
+2f000ffb (Sean Kerzel 2022-10-26 02:13:57 -0400 13) 	health_bar.max_value = max_health
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 1) extends Area2D
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 2) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 3) export var damage = 20
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  1) extends Node
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  2) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  3) signal health_updated(health)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  4) signal sanity_updated(sanity)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  5) signal killed()
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  6) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  7) export (float) var max_health = 100
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  8) onready var health = max_health setget _set_health
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  9) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 10) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 11) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 12) func _set_health(value):
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 13) 	var prev_health = health
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 14) 	health = clamp(value,0,max_health)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 15) 	if health != prev_health:
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 16) 		emit_signal("health_updated",health)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 17) 		if health <= 0:
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 18) 			emit_signal("killed")
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  1) shader_type canvas_item;
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  2) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  3) uniform bool whiten = false;
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  4) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  5) void fragment(){
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  6) 	vec4 texture_color = texture(TEXTURE, UV);
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  7) 	if(whiten){
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  8) 		vec3 white = vec3(1,1,1);
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  9) 		vec3 whitened_texture_rgb = mix(texture_color.rgb, white, 0.6);
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 10) 		COLOR = vec4(whitened_texture_rgb, texture_color.a);
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 11) 	}else{
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 12) 		COLOR = texture_color
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 13) 	}
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 14) 	
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 15) 	
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 16) }
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  1) extends Area2D
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  2) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  3) const whiten_duration = 0.15
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  4) export (ShaderMaterial) var whiten_material
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  5) onready var collision_shape = $CollisionShape2D
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  6) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  7) var is_invincible = false
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  8) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  9) func start_invincibility(invincibility_duration):
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 10) 	is_invincible = true
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 11) 	collision_shape.set_deferred("disabled", true)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 12) 	yield(get_tree().create_timer(invincibility_duration),"timeout")
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 13) 	collision_shape.set_deferred("disabled", false)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 14) 	is_invincible = false
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 15) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 16) func _on_Hurtbox_area_entered(area):
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 17) 	whiten_material.set_shader_param("whiten", true)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 18) 	yield(get_tree().create_timer(whiten_duration), "timeout")
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 19) 	whiten_material.set_shader_param("whiten", false)
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  1) extends Node
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  2) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  3) onready var blink_timer = $BlinkTimer
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  4) onready var duration_timer = $DurationTimer
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  5) var blink_object: Node2D
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  6) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  7) func start_blinking(object, duration):
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  8) 	blink_object = object
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400  9) 	duration_timer.wait_time = duration
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 10) 	duration_timer.start()
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 11) 	blink_timer.start()
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 12) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 13) func _on_BlinkTimer_timeout():
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 14) 	blink_object.visible = !blink_object.visible
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 15) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 16) 
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 17) func _on_DurationTimer_timeout():
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 18) 	blink_timer.stop()
+759e94da (Sean Kerzel 2022-10-27 03:59:32 -0400 19) 	blink_object.visible = true
