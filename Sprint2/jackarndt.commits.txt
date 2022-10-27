@@ -1,0 +1,111 @@
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  1) extends KinematicBody2D
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  2) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  3) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  4) const ACC = 50
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  5) const GRAVITY = 20
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  6) const SPEED = 100
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  7) var velocity = Vector2(0,0)
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  8) var smartDirection = Vector2(0,0)
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  9) var is_moving_right = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 10) var attacking = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 11) var isInRange = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 12) var attackCooldown = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 13) var squango = null
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 14) var flipRequired = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 15) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 16) func _ready():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 17) 	isInRange = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 18) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 19) func _process(_delta):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 20) 	if (isInRange):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 21) 		_attack()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 22) 		
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 23) 	else:
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 24) 		if (!attacking):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 25) 			move_character()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 26) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 27) func _attack():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 28) 	velocity.x = 0
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 29) 	$AnimatedSprite.play("shooting")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 30) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 31) 	if (!attackCooldown):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 32) 		_setCooldown()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 33) 		_hit()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 34) 		yield(get_tree().create_timer(1.0), "timeout")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 35) 		_hitEnd()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 36) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 37) func _setCooldown():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 38) 	attackCooldown = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 39) 	yield(get_tree().create_timer(1.0), "timeout")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 40) 	attackCooldown = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 41) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 42) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 43) func _hit():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 44) 	attacking = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 45) 	$AttackDetector.monitoring = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 46) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 47) func _hitEnd():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 48) 	attacking = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 49) 	$AttackDetector.monitoring = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 50) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 51) func move_character():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 52) 	$AnimatedSprite.play("default")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 53) 	smartDirection = position.direction_to(squango.position)
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 54) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 55) 	if (smartDirection.x >= 0):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 56) 		velocity.x = SPEED
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 57) 		if (!is_moving_right):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 58) 			flipRequired = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 59) 			
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 60) 		is_moving_right = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 61) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 62) 	else:
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 63) 		velocity.x = -SPEED
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 64) 		if (is_moving_right):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 65) 			flipRequired = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 66) 		
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 67) 		is_moving_right = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 68) 		
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 69) 	if (flipRequired):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 70) 		scale.x = -scale.x
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 71) 		flipRequired = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 72) 		
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 73) 	velocity.y += GRAVITY
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 74) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 75) 	if(velocity.y > GRAVITY * 20):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 76) 		velocity.y = GRAVITY * 20
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 77) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 78) 	velocity = move_and_slide(velocity, Vector2.UP)
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 79) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 80) func _on_PlayerDetector_body_entered(body):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 81) 	isInRange = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 82) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 83) func _on_PlayerDetector_body_exited(body):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 84) 	isInRange = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 85) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 86) func _on_AttackDetector_body_entered(body):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 87) 	print("hit successful")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 88) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 89) func _on_AttackDetector_body_exited(body):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 90) 	pass
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 91) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 92) func _on_SquangoSeeker_body_entered(body):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 93) 	if (body != self):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 94) 		squango = body
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400  8) func _attack():
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400  9) 	$Sprite.play("Attack")
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 10) 	$punchSFX.play(.18)
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 11) 		
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 12) func _jump():
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 13) 	$Sprite.play("Jump")
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 14) 	velocity.y = -450
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 15) 	$jumpSFX.play(.5)
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 16) 	
+551891db (jackarndt   2022-10-13 00:41:51 -0400 17) func _die():
+551891db (jackarndt   2022-10-13 00:41:51 -0400 18) 	$deathSFX.play(.1)
+551891db (jackarndt   2022-10-13 00:41:51 -0400 19) 	$Sprite.play("Death")
+551891db (jackarndt   2022-10-13 00:41:51 -0400 20) 	
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 38) 		_jump()
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 41) 		_attack()
+551891db (jackarndt   2022-10-13 00:41:51 -0400 44) 		_die()
+70eb9c2c (jackarndt   2022-10-13 00:33:35 -0400 51) 
