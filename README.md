@@ -1,3 +1,3 @@
 # Meowtillary
 
-https://github.com/Jazny/Meowtillary/settings
+https://github.com/Jazny/MeowTillery
