@@ -1,0 +1,348 @@
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  1) extends Node2D
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  2) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  3) const SlotClass = preload("Inventory_Panel.gd")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  4) onready var inventory_slots = $GridContainer
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  5) var holding_item = null
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  6)  
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  7) func _ready():
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  8) 	for inv_slot in inventory_slots.get_children():
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  9) 		inv_slot.connect("gui_input", self, "slot_gui_input", [inv_slot])
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 10) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 11) func slot_gui_input(event: InputEvent, slot: SlotClass):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 12) 	if event is InputEventMouseButton:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 13) 		if event.button_index == BUTTON_LEFT && event.pressed:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 14) 			if holding_item != null:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 15) 				if !slot.Item:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 16) 					slot.put_into_slot(holding_item)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 17) 					holding_item = null
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 18) 				else:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 19) 					var stack_size = int(JsonData.item_data[slot.Item.item_name]["StackSize"])
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 20) 					var able_to_add = stack_size - slot.Item.item_quantity
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 21) 					if able_to_add >= holding_item.item_quantity:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 22) 						slot.Item.add_item_quantity(holding_item.item_quantity)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 23) 						holding_item.queue_free()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 24) 						holding_item = null
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 25) 					else:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 26) 						slot.Item.add_item_quantity(able_to_add)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 27) 						holding_item.decrease_item_quantity(able_to_add)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 28) 			elif slot.Item:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 29) 				holding_item = slot.Item
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 30) 				slot.pick_from_slot()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 31) 				holding_item.global_position = get_global_mouse_position()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 32) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 33) func _input(event):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 34) 	if holding_item:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 35) 		holding_item.global_position = get_global_mouse_position()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  1) extends Panel
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  2) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  3) var default_tex = preload("res://Inventory/item_slot_default_background.png")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  4) var empty_tex = preload("res://Inventory/item_slot_empty_background.png")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  5) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  6) var default_style: StyleBoxTexture = null
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  7) var empty_style: StyleBoxTexture = null
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  8) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  9) var ItemClass = preload("res://Inventory/Test_Item.tscn")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 10) var Item = null
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 11) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 12) # Called when the node enters the scene tree for the first time.
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 13) func _ready():
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 14) 	default_style = StyleBoxTexture.new()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 15) 	empty_style = StyleBoxTexture.new()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 16) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 17) 	default_style.texture = default_tex
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 18) 	empty_style.texture = empty_tex
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 19) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 20) 	if randi() % 25 == 1:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 21) 		Item = ItemClass.instance()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 22) 		add_child(Item)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 23) 	refresh_style()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 24) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 25) func refresh_style():
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 26) 	if Item == null:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 27) 		set('custom_styles/panel', empty_style)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 28) 	else:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 29) 		set('custom-styles/panel', default_style)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 30) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 31) func pick_from_slot():
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 32) 	remove_child(Item)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 33) 	var InventoryNode = find_parent("Inventory")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 34) 	InventoryNode.add_child(Item)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 35) 	Item = null
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 36) 	refresh_style()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 37) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 38) func put_into_slot(nuItem):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 39) 	Item = nuItem
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 40) 	Item.position = Vector2(0,0)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 41) 	var InventoryNode = find_parent("Inventory")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 42) 	InventoryNode.remove_child(Item)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 43) 	add_child(Item)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 44) 	refresh_style()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 45) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 4) 	if body is KinematicBody2D:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 5) 		if body.name == "Squango":
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 6) 			get_tree().change_scene("res://Cafe_Scene.tscn")
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400  6) 	'Run a cat cafe, bombard PITA with cat themed artillery.',
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400  7) 	'Such as Cat-apults, Meowchine Guns, and even Ballsitic Meowsiles!',
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400  8) 	'Even get up close and personal with a Catana!'
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 11) var dialog_index = -1
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 18) 	if ($"RichTextLabel".visible == true):
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 19) 		$"Next-indicator".visible = finished
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 20) 	
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 35) 		dialog_index = -1
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400  6) 	$"Control/DialogBox/RichTextLabel".visible = false
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400  7) 	$"Control/DialogBox/TextureRect".visible = false
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400  8) 	$"Control/DialogBox/Next-indicator".visible = false
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 13) 	if(Input.is_action_just_pressed("ui_accept") and active == true):
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 14) 		$"Control/DialogBox/RichTextLabel".visible = true
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 15) 		$"Control/DialogBox/TextureRect".visible = true
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 16) 		$"ExclamationMark".visible = false
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 17) 		
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 18) 
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 22) 		$"ExclamationMark".visible = active
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 25) 	$"Control/DialogBox/RichTextLabel".visible = false
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 26) 	$"Control/DialogBox/TextureRect".visible = false
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 27) 	$"Control/DialogBox/Next-indicator".visible = false
+87f972c0 (U-LAPTOP-U4L9DA93\conom 2022-10-24 12:08:29 -0400 30) 		$"ExclamationMark".visible = active
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  1) extends KinematicBody2D
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  2) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  3) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  4) const ACC = 500
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  5) const GRAVITY = 20
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  6) const SPEED = 20
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  7) var velocity = Vector2(0,0)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  8) var rng = RandomNumberGenerator.new()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  9) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 10) func _process(delta):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 11) 	rng.randomize() 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 12) 	var randnum = rng.randi_range(0, 17)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 13) 	var randnum2 = rng.randi_range(0, 12)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 14) 	var randnum3 = rng.randi_range(0, 38)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 15) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 16) 	velocity.y += GRAVITY
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 17) 	if(velocity.y > GRAVITY * 20):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 18) 		velocity.y = GRAVITY * 20
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 19) 	if( ((randnum * randnum2) - randnum3) % 10 == 0 ):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 20) 		$AnimatedSprite.flip_h = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 21) 		$AnimatedSprite.play("Run_Right")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 22) 		velocity.x = min(velocity.x + ACC, SPEED)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 23) 	elif( ( (randnum * randnum2) - randnum3) % 10 == 1):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 24) 		$AnimatedSprite.flip_h = true
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 25) 		$AnimatedSprite.play("Run_Left")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 26) 		velocity.x = max(velocity.x - ACC, -SPEED)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 27) 	else: 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 28) 		$AnimatedSprite.play("Idle")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 29) 		
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 30) 	move_and_slide(velocity)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 31) 	velocity.x = lerp(velocity.x,0,0.15)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  1) extends Area2D
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  2) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  3) var active = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  4) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  5) func _ready():
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  6) 	$"QuestionMark".visible = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  7) 	$"Control/DialogBox/RichTextLabel".visible = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  8) 	$"Control/DialogBox/TextureRect".visible = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  9) 	$"Control/DialogBox/Next-indicator".visible = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 10) 	connect("body_entered", self, "_on_NPC_body_entered")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 11) 	connect("body_exited", self, "_on_NPC_body_exited")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 12) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 13) func _process(delta):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 14) 	if(active == true):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 15) 		$"Control/DialogBox/RichTextLabel".visible = true
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 16) 		$"Control/DialogBox/TextureRect".visible = true
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 17) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 18) func _on_NPC_body_entered(body):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 19) 	if body.name == "Squango":
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 20) 		$"QuestionMark".visible = true
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 21) 		active = true
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 22) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 23) func _on_NPC_body_exited(body):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 24) 	$"Control/DialogBox/RichTextLabel".visible = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 25) 	$"Control/DialogBox/TextureRect".visible = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 26) 	$"Control/DialogBox/Next-indicator".visible = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 27) 	$"QuestionMark".visible = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 28) 	if body.name == "Squango":
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 29) 		active = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400   1) extends Control
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400   2) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400   3) var dialog = [
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400   4) 	'Hello there.',
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400   5) 	'Hey.',
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400   6) 	"What's up?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400   7) 	"So, how is life going?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400   8) 	"I haven't seen you in ages!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400   9) 	"What have you been doing?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  10) 	"How's life going?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  11) 	"Whatcha doing?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  12) 	"I love this new cat cafe!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  13) 	"What are you up to?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  14) 	"Wanna buy some heroin?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  15) 	"So, is it just me, or does nyone else want a pistachio cappuccino?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  16) 	"Are you that coffee person?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  17) 	"Where is Squango when you need it?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  18) 	"uGH, why is Pita here?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  19) 	"Why are we still here?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  20) 	"Can I get a uhhhh, nevermind.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  21) 	"Where are all the cats?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  22) 	"I love cats!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  23) 	"How is it hanging?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  24) 	"I don't enjoy pita or PITA!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  25) 	"What's happening my main guy?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  26) 	"So, you work here?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  27) 	"Have you seen the kitties!!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  28) 	"So, how's life treating you?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  29) 	"So, PITA is back around? And I thought my day couldn't get worse.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  30) 	"So, what is cooking? Oh, I mean brewing?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  31) 	"Do I have to pay to hold the cats?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  32) 	"So, could you add even more cats?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  33) 	"How are you doing all of this?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  34) 	"So, what's the vibe of this place?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  35) 	"A cat cafe? What a novel concept.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  36) 	"You look absolutely fabulous, darling!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  37) 	"PITA cannot be back! They're crazy.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  38) 	"Listen, PITA is terrible and someone needs to deal with them.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  39) 	"What's controversial about this place?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  40) 	"Why can't I pick up the kitties?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  41) 	"So, there are how many cats?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  42) 	"There is so much fur everywhere!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  43) 	"This place is meowsome! Sorry, I couldn't resist.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  44) 	"So, is something happening over there?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  45) 	"Why didn't we come earlier?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  46) 	"I need to tell my husband about this place.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  47) 	"I need to tell my sister about this place.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  48) 	"I need to tell my bros about this place.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  49) 	"I really should find spend more time here.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  50) 	"I need to tell my wife about this place.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  51) 	"My girlfriend would love it here.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  52) 	"My boyfriend would love it here.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  53) 	"Why do we do this too ourselves?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  54) 	"Would it be a bad time to mention that I am allergic to cats?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  55) 	"I need to pet all the cats in this place!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  56) 	"I actually don't like coffee.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  57) 	"So, are you able to deal with all this?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  58) 	"This would be a great place for a DnD game!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  59) 	"So, are we just going to ignore PITA?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  60) 	"So, how much is it for a pistachio cappuccino?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  61) 	"Do you guys make skim goat milk double espresso shot chai lattes or is that the other place?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  62) 	"So, what drinks are you known for?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  63) 	"What's the meaning of life?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  64) 	"So, what's on the menu?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  65) 	"Did you see the witch outside?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  66) 	"So, is this supposed to look like this?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  67) 	"Can I pick up the cats?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  68) 	"Why do none of the cats wanna snuggle with me?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  69) 	"Writing Dialogue all day and not petting cats makes this NPC a very dull boy.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  70) 	"So, what can I get to drink?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  71) 	"Is it too early for an Irish Coffee?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  72) 	"So, anyone wanna play a tabletop game?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  73) 	"So, do you have carmel macchiatos?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  74) 	"This isn't the kind of place for a rum and coke? But, oh nevermind.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  75) 	"I have been very busy doing paperwork for my very real job.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  76) 	"So, if the make Cat Cafes? Why not make Dog Desserterie or a Bird Bistro?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  77) 	"Kitties!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  78) 	"They're so cute and fluffy!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  79) 	"We need to get cats now!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  80) 	"I really hate PITA.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  81) 	"CATS!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  82) 	"I found my calling! To get as many cats as possible!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  83) 	"So, can we appreciate the fluffy cats?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  84) 	"This coffee is to die for!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  85) 	"This place was looking sus. I almost thought it was run by PITA.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  86) 	"How can we be sure that PITA isn't involved?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  87) 	"So, what all are we doing?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  88) 	"How did I get here? Oh! Nevermind, cats!",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  89) 	"I came for the coffee, and I stayed for the cats.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  90) 	"So, are you going to the party?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  91) 	"So, why aren't we here all the time?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  92) 	"I certainly hope that I haven't repeated myself at all.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  93) 	"What else can I even say?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  94) 	"Oh, hello. Goodbye.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  95) 	"There is something sus about PITA.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  96) 	"This is why we should legalize sefdom, and here'smy TED talk on why.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  97) 	"I woke up and chose cats today.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  98) 	"So, there are only so many things to say, but so much time to say it.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  99) 	"This is not a story that PITA would tell you. It's an old cat legend.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 100) 	"So, can I order now?",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 101) 	"Damn, I need to pet some cats.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 102) 	"Looks like I have come to the right place.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 103) 	"This was quite difficult.",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 104) 	"Please help me, I am too weak to keep petting cats."
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 105) ]
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 106) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 107) var dialog_index = RandomNumberGenerator.new()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 108) var finished = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 109) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 110) func _ready(): 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 111) 	load_dialog()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 112) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 113) func _process(delta):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 114) 	if ($"RichTextLabel".visible == true):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 115) 		$"Next-indicator".visible = finished
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 116) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 117) 	if(Input.is_action_just_pressed("ui_accept")):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 118) 		load_dialog()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 119) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 120) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 121) func load_dialog():
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 122) 	dialog_index.randomize()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 123) 	var rand_num = dialog_index.randi_range(0, 100)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 124) 	if(rand_num < dialog.size()):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 125) 		finished = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 126) 		$RichTextLabel.bbcode_text = dialog[rand_num]
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 127) 		$RichTextLabel.percent_visible = 1
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 128) 		$Tween.interpolate_property(
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 129) 			$RichTextLabel, "percent_visible", 0, 1, 1, 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 130) 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 131) 		)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 132) 		$Tween.start()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 133) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 134) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 135) func _on_Tween_tween_completed(object, key):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 136) 	finished = true
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 1) {
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 2)    "Tree Branch": {
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 3)      "Item Category": "Resource",
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 4)      "StackSize": 98,
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 5)      "Description": "A tree branch. Did you really need me to describe that to you? Go outside for reference."
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 6)    }
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 7) }
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  1) extends Node
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  2) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  3) var item_data: Dictionary
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  4) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  5) func _ready():
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  6) 	item_data = LoadData("res://Inventory/Data/ItemData.json")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  7) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  8) func LoadData(file_path):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  9) 	var json_data
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 10) 	var file_data = File.new()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 11) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 12) 	file_data.open(file_path, File.READ)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 13) 	json_data = JSON.parse(file_data.get_as_text())
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 14) 	file_data.close()
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 15) 	return json_data.result
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  1) extends Node2D
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  2) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  3) var item_name
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  4) var item_quantity
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  5) 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  6) func _ready():
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  7) 	item_name = "Tree Branch"
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  8) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400  9) 	$TextureRect.texture = load("res://Inventory/Item_Icons/" + item_name + ".png")
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 10) 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 11) 	item_quantity = randi() % stack_size + 1 
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 12) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 13) 	if stack_size == 1:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 14) 		$Label.visible = false
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 15) 	else:
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 16) 		$Label.text = String(item_quantity)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 17) 		
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 18) func add_item_quantity(amount_to_add):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 19) 	item_quantity += amount_to_add
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 20) 	$Label.text = String(item_quantity)
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 21) 	
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 22) func decrease_item_quantity(amount_to_remove):
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 23) 	item_quantity -= amount_to_remove
+740bd751 (U-LAPTOP-U4L9DA93\conom 2022-10-27 09:16:10 -0400 24) 	$Label.text = String(item_quantity)
+

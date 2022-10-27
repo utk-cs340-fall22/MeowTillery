@@ -38,7 +38,7 @@ My name is Conor O'Malley. My Github ID is comalle. The prject that I am working
 * Dialogue/NPC_Dialogue_Template.gd
 * Inventory/Data/ItemData.json
 * Inventory/Data/JSON_DATA.gd
-* Test_Item.gd
+* Inventory/Test_Item.gd
 * Entrance.gd
 * Inventory.gd
 * Inventory_Panel.gd
