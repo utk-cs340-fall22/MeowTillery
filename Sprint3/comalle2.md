@@ -10,7 +10,7 @@ My name is Conor O'Malley. My Github ID is comalle. The prject that I am working
 * Character Movement on Speech or a talking animation. [Issue 15](https://github.com/Jazny/MeowTillery/issues/15 "Issue 15")
 * Character Interaction which is pretty Vague. [Issue 13](https://github.com/Jazny/MeowTillery/issues/13 "Issue 13")
 * Which I took as Dialogue and inventory management which is ongoing.
-* This is picking things up in general. [Issue 62](https://github.com/Jazny/MeowTillery/issues/62 "Issue 62"
+* This is picking things up in general. [Issue 62](https://github.com/Jazny/MeowTillery/issues/62 "Issue 62")
 
 # What did I not get to?
 * I didn't finish the ambient human AI which does some very interesting activity.
@@ -30,7 +30,7 @@ My name is Conor O'Malley. My Github ID is comalle. The prject that I am working
 * This issue was essentially a hotbar for ease of access to players instead of opening the inventory every time.
 * Finsihing Inventory with a working hotbar, equipment slots, and picking things up. [Issue 45](https://github.com/Jazny/MeowTillery/issues/45 "Issue 45")
 * Including Weapons in the inventory that can be equipped. [Issue 49](https://github.com/Jazny/MeowTillery/issues/49 "Issue 49")
-* This is picking things up in general. [Issue 62](https://github.com/Jazny/MeowTillery/issues/62 "Issue 62"
+* This is picking things up in general. [Issue 62](https://github.com/Jazny/MeowTillery/issues/62 "Issue 62")
 * Adding an ambient Human AI.  [Issue 35](https://github.com/Jazny/MeowTillery/issues/35 "Issue 35")
 * Character Interaction which is pretty Vague. [Issue 13](https://github.com/Jazny/MeowTillery/issues/13 "Issue 13")
 * Which I took as Dialogue and inventory management which is still an ongoing process which will hopefully be relatively finished by the end of Sprint 4.
