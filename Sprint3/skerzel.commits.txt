@@ -1,0 +1,167 @@
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  1) extends Area2D
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  2) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  3) export var damage = 0
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  4) var active = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  5) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  6) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  7) func _ready():
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  8) 	$"Control/DialogBox/RichTextLabel".visible = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  9) 	$"Control/DialogBox/TextureRect".visible = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 10) 	$"Control/DialogBox/Next-indicator".visible = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 11) 	connect("body_entered", self, "_on_bed_body_entered")
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 12) 	connect("body_exited", self, "_on_bed_body_exited")
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 13) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 14) func _process(delta):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 15) 	if(Input.is_action_just_pressed("ui_accept") and active == true):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 16) 		$"Control/DialogBox/RichTextLabel".visible = true
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 17) 		$"Control/DialogBox/TextureRect".visible = true
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 18) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 19) func _on_bed_body_entered(body):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 20) 	if body.name == "Squango":
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 21) 		active = true
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 22) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 23) func _on_bed_body_exited(body):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 24) 	$"Control/DialogBox/RichTextLabel".visible = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 25) 	$"Control/DialogBox/TextureRect".visible = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 26) 	$"Control/DialogBox/Next-indicator".visible = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 27) 	if body.name == "Squango":
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 28) 		active = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  1) extends Control
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  2) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  3) var dialog = [
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  4) 	'Would you like to sleep? Press Enter.',
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  5) 	'Sleep completed.'
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  6) ]
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  7) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  8) var dialog_index = -1
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  9) var finished = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 10) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 11) var count = 0
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 12) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 13) func _ready(): 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 14) 	load_dialog()
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 15) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 16) func _process(delta):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 17) 	if ($"RichTextLabel".visible == true):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 18) 		$"Next-indicator".visible = finished
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 19) 	
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 20) 	if(Input.is_action_just_pressed("ui_accept")):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 21) 		load_dialog()
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 22) 		if count == 1:
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 23) 			PlayerStat._set_health(100)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 24) 		count +=1
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 25) 		
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 26) 		
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 27) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 28) func load_dialog():
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 29) 	if(dialog_index < dialog.size()):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 30) 		finished = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 31) 		$RichTextLabel.bbcode_text = dialog[dialog_index]
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 32) 		$RichTextLabel.percent_visible = 0
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 33) 		$Tween.interpolate_property(
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 34) 			$RichTextLabel, "percent_visible", 0, 1, 1, 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 35) 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 36) 		)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 37) 		$Tween.start()
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 38) 	else:
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 39) 		dialog_index = -1
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 40) 		count =0
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 41) 	dialog_index += 1
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 42) 	
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 43) func _on_Tween_tween_completed(object, key):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 44) 	finished = true
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  22) export var damage = 0
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  23) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 117) 	if area.damage != 0 and stats.health > 0 and stats.sanity > 0:
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 124) #func _on_SanityBar_killed():
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 125) #	_die()
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  7) 	_health_update(PlayerStat.health)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  7) export var damage = 50
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  8) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 19) 	if area.damage != 0 and PlayerStat.health > 0 and PlayerStat.sanity > 0:
+90f21a16 (Sean Kerzel 2022-11-09 00:48:21 -0500 20) 		whiten_material.set_shader_param("whiten", true)
+90f21a16 (Sean Kerzel 2022-11-09 00:48:21 -0500 21) 		yield(get_tree().create_timer(whiten_duration), "timeout")
+90f21a16 (Sean Kerzel 2022-11-09 00:48:21 -0500 22) 		whiten_material.set_shader_param("whiten", false)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 10) 	PlayerStat._set_health(100)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 11) 	PlayerStat._set_sanity(100)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 3) export var damage = 0
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  9) #onready var health = 80 setget _set_health
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 11) export (float) var max_sanity = 100
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 12) onready var sanity = max_sanity setget _set_sanity
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 15) func _set_sanity(value):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 16) 	var prev_sanity = sanity
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 17) 	sanity = clamp(value,0,max_sanity)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 18) 	if sanity != prev_sanity:
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 19) 		emit_signal("sanity_updated",sanity)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 20) 		if sanity <= 0:
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 21) 			emit_signal("killed")
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 22) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  1) extends Control
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  2) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  3) onready var health_bar = $Health
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  4) #onready var Rstats = 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  5) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  6) #func _ready():
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  7) #	Rstats.connect("health_updated", self, "_health_update")
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  8) #	_health_update(Rstats.health)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  9) 	
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 10) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 11) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 12) func _max_health_update(max_health):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 13) 	health_bar.max_value = max_health
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 14) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 15) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 16) func _on_Robert_Scrum_Stats_health_updated(health):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 17) 	health_bar.value = health
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  1) extends Area2D
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  2) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  3) const whiten_duration = 0.15
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  4) export (ShaderMaterial) var whiten_material
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  5) onready var collision_shape = $CollisionShape2D
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  6) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  7) export var damage = 0
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  8) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  9) var is_invincible = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 10) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 11) func start_invincibility(invincibility_duration):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 12) 	is_invincible = true
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 13) 	collision_shape.set_deferred("disabled", true)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 14) 	yield(get_tree().create_timer(invincibility_duration),"timeout")
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 15) 	collision_shape.set_deferred("disabled", false)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 16) 	is_invincible = false
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 17) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 18) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 19) #func _on_RHurtbox_area_entered(area):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 20) #	if area.damage != 0:
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 21) #		whiten_material.set_shader_param("whiten", true)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 22) #		yield(get_tree().create_timer(whiten_duration), "timeout")
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 23) #		whiten_material.set_shader_param("whiten", false)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  1) extends Node
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  2) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  3) signal health_updated(health)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  4) signal killed()
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  5) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  6) export (float) var max_health = 100
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  7) onready var health = max_health setget _set_health
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  8) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  9) func _set_health(value):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 10) 	var prev_health = health
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 11) 	health = clamp(value,0,max_health)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 12) 	if health != prev_health:
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 13) 		emit_signal("health_updated",health)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 14) 		if health <= 0:
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 15) 			emit_signal("killed")
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  3) onready var sanity_bar = $Sanity
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  4) #signal killed()
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  6) func _ready():
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  7) 	PlayerStat.connect("sanity_updated", self, "_sanity_update")
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  8) 	_sanity_update(PlayerStat.sanity)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500  9) 
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 10) func _sanity_update(sanity):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 11) 	sanity_bar.value = sanity
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 14) 	if(get_tree().get_current_scene().get_name() == "background_testing"):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 15) 		PlayerStat._set_sanity(PlayerStat.sanity-10)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 16) 	if(get_tree().get_current_scene().get_name() == "Cafe_Scene"):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 17) 		PlayerStat._set_sanity(PlayerStat.sanity+1)
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 18) 	if(get_tree().get_current_scene().get_name() == "cat_dungeon"):
+418d5245 (Sean Kerzel 2022-11-09 07:09:30 -0500 19) 		PlayerStat._set_sanity(PlayerStat.sanity+1)
