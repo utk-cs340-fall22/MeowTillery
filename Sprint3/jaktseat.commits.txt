@@ -1,0 +1,126 @@
+41f9decc (Jake Seaton 2022-10-25 09:21:28 -0400  81) 	animate()	
+41f9decc (Jake Seaton 2022-10-25 09:21:28 -0400  87) func animate():
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  88) 	if(stateR == "dead"):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  89) 		sprite.play("death")
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  90) 		return
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  91) 	elif(is_on_wall() and (stateJ == "jump1" or stateJ == "jump2") and Input.is_action_pressed("mv_wall_slide")):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  92) 		sprite.play("Wall Slide")
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  93) 		return
+41f9decc (Jake Seaton 2022-10-25 09:21:28 -0400  94) 	elif(Input.is_action_just_pressed("mv_jump")):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  95) 		sprite.play("Jump")
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  96) 		return
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  97) 	elif(Input.is_action_pressed("mv_right") or Input.is_action_pressed("mv_left")):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  98) 		sprite.play("Run")
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  99) 		return
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 100) 	elif(Input.is_action_just_released("mv_right") or Input.is_action_just_released("mv_left")):
+41f9decc (Jake Seaton 2022-10-25 09:21:28 -0400 101) 		sprite.play("Idle")
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 102) 		return
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 103) 	if(xVelocity == 0 and yVelocity <= 5):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 104) 		sprite.play("Idle")
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 136) func _on_Sprite_animation_finished():
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 137) 	sprite.play("Idle")
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  1) extends KinematicBody2D
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  2) 
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  3) const FIRERATE = 0.2
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  4) const MOVE_SPEED = 50
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  5) const ACC = 80
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  6) const JUMP_FORCE = 1000
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  7) const GRAVITY = 50
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  8) const TERMINAL_VELOCITY = 1000
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  9) const RANGE = 600
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 10) 
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 11) onready var sprite = $Sprite
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 12) var direction = Vector2(0,0)
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 13) var lookingRight = true
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 14) var player = null
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 15) var yVelocity = 0
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 16) var xVelocity = 0
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 17) var inRange = false
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 18) var projectile = preload("res://IngridProjectile.tscn")
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 19) var fireTime = 0.0
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 20) var burstCounter = 0;
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 21) 
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 22) func _physics_process(delta):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 23) 	if(player == null):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 24) 		return
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 25) 		
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 26) 	if (inRange == true):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 27) 		xVelocity = 0
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 28) 		fireTime += delta
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 29) 		if(burstCounter >= 5):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 30) 			yield(get_tree().create_timer(0.7), "timeout")
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 31) 			burstCounter = 0
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 32) 			fireTime = 0.0
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 33) 		elif(fireTime > FIRERATE):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 34) 			fireTime = 0.0
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 35) 			burstCounter += 1
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 36) 			_fire()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 37) 			
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 38) 	if (inRange == false):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 39) 		_move()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 40) 	
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 41) 	
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 42) func _fire():
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 43) 	if(global_position.distance_to(player.global_position) > RANGE):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 44) 		inRange = false
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 45) 		return
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 46) 	var projInstance = projectile.instance()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 47) 	get_tree().get_root().add_child(projInstance)
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 48) 	var dirToPlayer = (player.global_position - global_position).normalized()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 49) 	if(dirToPlayer.x > 0):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 50) 		projInstance.global_position.x = global_position.x + 100
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 51) 		projInstance.global_position.y = global_position.y
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 52) 	if(dirToPlayer.x < 0):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 53) 		projInstance.global_position.x = global_position.x - 100
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 54) 		projInstance.global_position.y = global_position.y
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 55) 	projInstance.movement = dirToPlayer
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 56) 	
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 57) 	
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 58) func _move():
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 59) 	if(global_position.distance_to(player.global_position) <= RANGE):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 60) 		inRange = true
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 61) 		
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 62) 	direction = position.direction_to(player.position)
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 63) 	
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 64) 	if(direction.x >= 0):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 65) 		xVelocity = min(xVelocity + ACC, MOVE_SPEED)
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 66) 	if(direction.x <= 0):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 67) 		xVelocity = max(xVelocity - ACC, -MOVE_SPEED)
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 68) 		
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 69) 	move_and_slide(Vector2(xVelocity, yVelocity), Vector2(0, -1))
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 70) 	xVelocity = lerp(xVelocity,0,0.15)
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 71) 	
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 72) 	if(lookingRight and xVelocity <= 0):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 73) 		flip()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 74) 	if(!lookingRight and xVelocity >= 0):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 75) 		flip()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 76) 		
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 77) 	yVelocity += GRAVITY
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 78) 	if(yVelocity > TERMINAL_VELOCITY):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 79) 		yVelocity = TERMINAL_VELOCITY	
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 80) 		
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 81) func flip():
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 82) 	lookingRight = !lookingRight
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 83) 	sprite.flip_h = !sprite.flip_h
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 84) 	
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 85) func set_player(p):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 86) 	player = p
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 87) 
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 88) 
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  1) extends KinematicBody2D
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  2) 
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  3) var movement = Vector2()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  4) const SPEED = 250
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  5) export var damage = 34
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  6) func _physics_process(delta):
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  7) 	rotate(0.04)
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  8) 	var collision = move_and_collide(movement * SPEED * delta)
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500  9) 	if collision:
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 10) 		if collision.collider.name == "Player":
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 11) 			collision.collider._die()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 12) 		if collision.collider.name != "Player":
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 13) 			queue_free()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 14) 		queue_free()
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 1) extends Area2D
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 2) 
+6f8e082d (Jake Seaton 2022-11-09 23:08:29 -0500 3) export var damage = 4
