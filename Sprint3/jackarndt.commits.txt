@@ -1,0 +1,471 @@
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  1) extends KinematicBody2D
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  2) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  3) const ACC = 50
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  4) const GRAVITY = 20
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  5) const SPEED = 100
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  6) var velocity = Vector2(0,0)
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  7) var smartDirection = Vector2(0,0)
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  8) var is_moving_right = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400  9) var attacking = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 10) var isInRange = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 11) var attackCooldown = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 12) var squango = null
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 13) var flipRequired = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 14) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 15) func _ready():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 16) 	isInRange = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 17) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 18) func _process(_delta):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 19) 	if (isInRange):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 20) 		_attack()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 21) 		
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 22) 	else:
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 23) 		if (!attacking):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 24) 			move_character()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 25) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 26) func _attack():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 27) 	velocity.x = 0
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 28) 	$AnimatedSprite.play("shooting")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 29) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 30) 	if (!attackCooldown):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 31) 		_setCooldown()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 32) 		_hit()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 33) 		yield(get_tree().create_timer(1.0), "timeout")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 34) 		_hitEnd()
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 35) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 36) func _setCooldown():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 37) 	attackCooldown = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 38) 	yield(get_tree().create_timer(1.0), "timeout")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 39) 	attackCooldown = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 40) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 41) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 42) func _hit():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 43) 	attacking = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 44) 	$AttackDetector.monitoring = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 45) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 46) func _hitEnd():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 47) 	attacking = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 48) 	$AttackDetector.monitoring = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 49) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 50) func move_character():
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 51) 	$AnimatedSprite.play("default")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 52) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 53) 	if (squango == null) :
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 54) 		velocity.x = SPEED
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 55) 	else:
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 56) 		smartDirection = position.direction_to(squango.position)
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 57) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 58) 		if (smartDirection.x >= 0):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 59) 			velocity.x = SPEED
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 60) 			if (!is_moving_right):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 61) 				flipRequired = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 62) 			
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 63) 			is_moving_right = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 64) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 65) 		else:
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 66) 			velocity.x = -SPEED
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 67) 			if (is_moving_right):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 68) 				flipRequired = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 69) 		
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 70) 			is_moving_right = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 71) 		
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 72) 	if (flipRequired):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 73) 		scale.x = -scale.x
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 74) 		flipRequired = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 75) 		
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 76) 	velocity.y += GRAVITY
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 77) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 78) 	if(velocity.y > GRAVITY * 20):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 79) 		velocity.y = GRAVITY * 20
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 80) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 81) 	velocity = move_and_slide(velocity, Vector2.UP)
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 82) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 83) func _on_PlayerDetector_body_entered(body):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 84) 	if (body.name == "Squango"):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 85) 		isInRange = true
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 86) 	
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 87) func _on_PlayerDetector_body_exited(body):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 88) 	if (body.name == "Squango"):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 89) 		isInRange = false
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 90) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 91) func _on_AttackDetector_body_entered(body):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 92) 	print("hit successful")
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 93) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 94) func _on_AttackDetector_body_exited(body):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 95) 	pass
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 96) 
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 97) func _on_SquangoSeeker_body_entered(body):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 98) 	if (body.name == "Squango"):
+4a1b75ee (jackarndt 2022-10-26 22:50:00 -0400 99) 		squango = body
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  1) [gd_scene load_steps=7 format=2]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  2) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  3) [ext_resource path="res://icon.png" type="Texture" id=1]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  4) [ext_resource path="res://SpawnTester.gd" type="Script" id=2]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  5) [ext_resource path="res://Squango.tscn" type="PackedScene" id=3]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  6) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  7) [sub_resource type="RectangleShape2D" id=1]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  8) extents = Vector2( 516, 15 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  9) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 10) [sub_resource type="RectangleShape2D" id=2]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 11) extents = Vector2( 24.5, 211.25 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 12) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 13) [sub_resource type="RectangleShape2D" id=3]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 14) extents = Vector2( 19.25, 250 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 15) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 16) [node name="Node2D" type="Node2D"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 17) script = ExtResource( 2 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 18) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 19) [node name="StaticBody2D" type="StaticBody2D" parent="."]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 20) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 21) [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 22) position = Vector2( 506, 534 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 23) shape = SubResource( 1 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 24) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 25) [node name="Icon" type="Sprite" parent="StaticBody2D"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 26) position = Vector2( 505, 553 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 27) scale = Vector2( 18.0938, 1 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 28) texture = ExtResource( 1 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 29) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 30) [node name="StaticBody2D2" type="StaticBody2D" parent="."]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 31) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 32) [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 33) position = Vector2( -2.5, 314.25 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 34) shape = SubResource( 2 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 35) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 36) [node name="Sprite" type="Sprite" parent="StaticBody2D2"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 37) position = Vector2( -9, 315 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 38) scale = Vector2( 1, 6.59375 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 39) texture = ExtResource( 1 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 40) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 41) [node name="StaticBody2D3" type="StaticBody2D" parent="."]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 42) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 43) [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 44) position = Vector2( 1026, 291 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 45) shape = SubResource( 3 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 46) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 47) [node name="Sprite" type="Sprite" parent="StaticBody2D3"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 48) position = Vector2( 1035, 316 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 49) scale = Vector2( 1, 6.4375 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 50) texture = ExtResource( 1 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 51) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 52) [node name="Squango" parent="." instance=ExtResource( 3 )]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 53) position = Vector2( 266, 476 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 54) scale = Vector2( 3.82202, 3.82202 )
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500  1) extends Node2D
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500  2) 
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500  3) var minion = preload("res://minion.tscn")
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500  4) var jenner = preload("res://Kendall_Jenner.tscn")
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500  5) 
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500  6) # Declare member variables here. Examples:
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500  7) # var a = 2
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500  8) # var b = "text"
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500  9) 
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 10) 
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 11) # Called when the node enters the scene tree for the first time.
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 12) func _ready():
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 13) 	
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 15) #	var minion2 = minion.instance()
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 16) #	var minion3 = minion.instance()
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 17) 	
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 19) #	minion2.position = Vector2(600, 300)
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 20) #	minion3.position = Vector2(600, 100)
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 21) 	
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 23) #	add_child(minion2)
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 24) #	add_child(minion3)
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 25) 
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 26) 	var jenner1 = jenner.instance()
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 27) 	jenner1.position = Vector2(600, 100)
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 28) 	add_child(jenner1)
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 29) 
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 30) 
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 31) # Called every frame. 'delta' is the elapsed time since the previous frame.
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 32) #func _process(delta):
+85f68a70 (jackarndt         2022-11-09 14:21:03 -0500 33) #	pass
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500  1) [gd_scene load_steps=13 format=2]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  2) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  3) [ext_resource path="res://minion.gd" type="Script" id=1]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  4) [ext_resource path="res://minion/goomba.png" type="Texture" id=2]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  5) [ext_resource path="res://AttackDetector.gd" type="Script" id=3]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500  6) [ext_resource path="res://StompDetector.gd" type="Script" id=4]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500  7) 
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500  8) [sub_resource type="AtlasTexture" id=7]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500  9) flags = 4
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 10) atlas = ExtResource( 2 )
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 11) region = Rect2( 64, 0, 64, 64 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 12) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 13) [sub_resource type="AtlasTexture" id=1]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 14) flags = 4
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 15) atlas = ExtResource( 2 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 16) region = Rect2( 64, 0, 64, 64 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 17) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 18) [sub_resource type="AtlasTexture" id=2]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 19) flags = 4
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 20) atlas = ExtResource( 2 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 21) region = Rect2( 0, 0, 64, 64 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 22) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 23) [sub_resource type="AtlasTexture" id=3]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 24) flags = 4
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 25) atlas = ExtResource( 2 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 26) region = Rect2( 128, 0, 64, 64 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 27) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 28) [sub_resource type="SpriteFrames" id=4]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 29) animations = [ {
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 30) "frames": [ SubResource( 7 ) ],
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 31) "loop": true,
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 32) "name": "Death",
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 33) "speed": 5.0
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 34) }, {
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 35) "frames": [ SubResource( 1 ) ],
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 36) "loop": true,
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 37) "name": "Standing",
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 38) "speed": 5.0
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 39) }, {
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 40) "frames": [ SubResource( 2 ), SubResource( 3 ) ],
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 41) "loop": true,
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 42) "name": "Walking",
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 43) "speed": 5.0
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 44) } ]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 45) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 46) [sub_resource type="RectangleShape2D" id=5]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 47) extents = Vector2( 32, 32 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 48) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 49) [sub_resource type="RectangleShape2D" id=6]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 50) extents = Vector2( 4.5, 32 )
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 51) 
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 52) [sub_resource type="RectangleShape2D" id=8]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 53) extents = Vector2( 31, 2 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 54) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 55) [node name="minion" type="KinematicBody2D"]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 56) script = ExtResource( 1 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 57) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 58) [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 59) frames = SubResource( 4 )
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 60) animation = "Death"
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 61) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 62) [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 63) shape = SubResource( 5 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 64) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 65) [node name="AttackDetector" type="Area2D" parent="."]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 66) position = Vector2( 0, 6 )
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 67) scale = Vector2( 1, 0.804688 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 68) script = ExtResource( 3 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 69) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 70) [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector"]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 71) position = Vector2( -37.5, 0 )
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 72) shape = SubResource( 6 )
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 73) 
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 74) [node name="StompDetector" type="Area2D" parent="."]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 75) script = ExtResource( 4 )
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 76) 
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 77) [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector"]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 78) position = Vector2( 0, -35 )
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 79) shape = SubResource( 8 )
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 80) 
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 81) [connection signal="body_entered" from="AttackDetector" to="." method="_on_AttackDetector_body_entered"]
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 82) [connection signal="body_entered" from="StompDetector" to="." method="_on_StompDetector_body_entered"]
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  1) extends KinematicBody2D
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  2) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  3) const ACC = 50
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  4) const GRAVITY = 20
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  5) const SPEED = 100
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  6) var velocity = Vector2(0,0)
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  7) var smartDirection = Vector2(0,0)
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  8) var is_moving_right = false
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500  9) var attacking = false
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 10) var isInRange = false
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 11) var attackCooldown = false
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 12) var squango = null
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 13) var flipRequired = false
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 14) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 15) func _ready():
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 16) 	isInRange = false
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 17) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 18) func _process(_delta):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 19) 	if (isInRange):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 20) 		_attack()
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 21) 		
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 22) 	else:
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 23) 		if (!attacking):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 24) 			move_character()
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 25) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 26) func _attack():
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 27) 	velocity.x = 0
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 28) 	$AnimatedSprite.play("shooting")
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 29) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 30) 	if (!attackCooldown):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 31) 		_setCooldown()
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 32) 		_hit()
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 33) 		yield(get_tree().create_timer(1.0), "timeout")
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 34) 		_hitEnd()
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 35) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 36) func _setCooldown():
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 37) 	attackCooldown = true
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 38) 	yield(get_tree().create_timer(1.0), "timeout")
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 39) 	attackCooldown = false
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 40) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 41) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 42) func _hit():
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 43) 	attacking = true
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 44) 	$AttackDetector.monitoring = true
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 45) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 46) func _hitEnd():
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 47) 	attacking = false
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 48) 	$AttackDetector.monitoring = false
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 49) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 50) func move_character():
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 51) 	$AnimatedSprite.play("Walking")
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 52) 	
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 53) 	if (is_moving_right):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 54) 		velocity.x = SPEED
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 55) 		
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 56) 	else:
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 57) 		velocity.x = -SPEED
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 58) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 59) 	velocity.y += GRAVITY
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 60) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 61) 	if(velocity.y > GRAVITY * 20):
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 62) 		velocity.y = GRAVITY * 20
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 63) 	
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 64) 	velocity = move_and_slide(velocity, Vector2.UP)
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 65) 
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 66) func _on_AttackDetector_body_entered(body):
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 67) 	if (body.name == "Squango"):
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 68) 		print("hit successful")
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 69) 
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 70) 	else:
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 71) 		if (is_moving_right):
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 72) 			scale.x = -scale.x
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 73) 			is_moving_right = false
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 74) 		else:
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 75) 			is_moving_right = true
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 76) 			scale.x = -scale.x
+cf1a51bb (jackarndt 2022-11-08 20:01:34 -0500 77) 
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 78) func _on_StompDetector_body_entered(body):
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 79) 	if (body.name == "Squango"):
+f4bb9101 (jackarndt 2022-11-08 21:53:18 -0500 80) 		print("goomba stomped")
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  1) [gd_scene load_steps=8 format=2]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  2) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  3) [ext_resource path="res://kendall_jenner/1439477217.webp" type="Texture" id=1]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  4) [ext_resource path="res://SquangoSeeker.gd" type="Script" id=2]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  5) [ext_resource path="res://Kendall_Jenner.gd" type="Script" id=3]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  6) [ext_resource path="res://AttackDetector.gd" type="Script" id=4]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  7) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  8) [sub_resource type="RectangleShape2D" id=1]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  9) extents = Vector2( 56, 55 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 10) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 11) [sub_resource type="CircleShape2D" id=2]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 12) radius = 292.582
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 13) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 14) [sub_resource type="RectangleShape2D" id=3]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 15) extents = Vector2( 2.14434, 24.353 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 16) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 17) [node name="Kendall_Jenner" type="KinematicBody2D"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 18) script = ExtResource( 3 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 19) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 20) [node name="Sprite" type="Sprite" parent="."]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 21) position = Vector2( -1.90735e-06, 0 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 22) scale = Vector2( -0.0440378, 0.0641843 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 23) texture = ExtResource( 1 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 24) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 25) [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 26) shape = SubResource( 1 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 27) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 28) [node name="SquangoSeeker" type="Area2D" parent="."]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 29) script = ExtResource( 2 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 30) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 31) [node name="CollisionShape2D" type="CollisionShape2D" parent="SquangoSeeker"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 32) scale = Vector2( 0.772291, -0.316073 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 33) shape = SubResource( 2 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 34) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 35) [node name="AttackDetector" type="Area2D" parent="."]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 36) script = ExtResource( 4 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 37) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 38) [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 39) position = Vector2( -62.2454, -0.115753 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 40) scale = Vector2( 1.75091, 2.2537 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 41) shape = SubResource( 3 )
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 42) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 43) [connection signal="body_entered" from="SquangoSeeker" to="." method="_on_SquangoSeeker_body_entered"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 44) [connection signal="body_exited" from="SquangoSeeker" to="." method="_on_SquangoSeeker_body_exited"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 45) [connection signal="body_entered" from="AttackDetector" to="." method="_on_AttackDetector_body_entered"]
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  1) extends KinematicBody2D
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  2) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  3) const ACC = 50
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  4) const GRAVITY = 20
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  5) const SPEED = 50
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  6) var velocity = Vector2(0,0)
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  7) var smartDirection = Vector2(0,0)
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  8) var is_moving_right = false
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500  9) var attacking = false
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 10) var isInRange = false
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 11) var attackCooldown = false
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 12) var squango = null
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 13) var flipRequired = false
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 14) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 15) func _ready():
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 16) 	isInRange = false
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 17) 	
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 18) func _process(_delta):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 19) 	if (isInRange):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 20) 		_attack()
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 21) 		
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 22) 	else:
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 23) 		move_character()
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 24) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 25) func _attack():
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 26) 	
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 27) 	smartDirection = position.direction_to(squango.position)
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 28) 	
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 29) 	if (smartDirection.x >= 0):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 30) 		velocity.x = SPEED * 6
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 31) 		if (!is_moving_right):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 32) 			flipRequired = true
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 33) 			
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 34) 		is_moving_right = true
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 35) 	
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 36) 	else:
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 37) 		velocity.x = -SPEED * 6
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 38) 		if (is_moving_right):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 39) 			flipRequired = true
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 40) 		
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 41) 		is_moving_right = false
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 42) 		
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 43) 	if (flipRequired):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 44) 		scale.x = -scale.x
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 45) 		flipRequired = false
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 46) 		
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 47) 	velocity = move_and_slide(velocity, Vector2.UP)
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 48) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 49) func move_character():
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 50) 	if (!is_moving_right):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 51) 		velocity.x = -SPEED
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 52) 	else:
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 53) 		velocity.x = SPEED
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 54) 		
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 55) 	velocity.y += GRAVITY
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 56) 	
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 57) 	if(velocity.y > GRAVITY * 20):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 58) 		velocity.y = GRAVITY * 20
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 59) 	
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 60) 	velocity = move_and_slide(velocity, Vector2.UP)
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 61) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 62) func _on_AttackDetector_body_entered(body):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 63) 	if (body.name == "Squango"):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 64) 		print("hit successful")
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 65) 	else:
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 66) 		if (is_moving_right):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 67) 			scale.x = -scale.x
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 68) 			is_moving_right = false
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 69) 		else:
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 70) 			is_moving_right = true
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 71) 			scale.x = -scale.x
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 72) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 73) func _on_SquangoSeeker_body_entered(body):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 74) 	if (body.name == "Squango"):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 75) 		squango = body
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 76) 		isInRange = true
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 77) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 78) 
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 79) func _on_SquangoSeeker_body_exited(body):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 80) 	if (body.name == "Squango"):
+85f68a70 (jackarndt 2022-11-09 14:21:03 -0500 81) 		isInRange = false
