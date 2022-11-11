@@ -18,14 +18,20 @@ We will avoid this in the future by only testing on copies of shared scenes and/
 
 ## Issues I worked on
 #43: Create a new scene
+
 #46: Popup menu for cats
+
 #54: Exit makes Squango Apear on Entrance Door (still in-progress)
 
 ## Files I worked on
 caged_grey_cat.gd
+
 cat_popup.gd
+
 caged_grey_cat_Area2D.gd
+
 dungeon_to_bedroom.gd
+
 bedroom_to_dungeon.gd
 
 ## Accomplished
