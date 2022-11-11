@@ -1,0 +1,98 @@
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500  1) extends Node2D
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  2) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  3) func _ready():
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500  4) 	get_node("grey_cat_chilling").play("default")
+59be5e90 (Sonaz 2022-11-10 08:41:37 -0500  5) 	
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500  6) 
+59be5e90 (Sonaz 2022-11-10 08:41:37 -0500  7) func _on_Button_pressed():
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500  8) 	get_node("grey_cat_chilling").hide()
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500  9) 	get_node("AnimationPlayer").play("Weapon Unlocked")
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 10) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 11) 
+59be5e90 (Sonaz 2022-11-10 08:41:37 -0500 12) func _on_Button2_pressed():
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500 13) 	get_node("grey_cat_chilling").play("eating")
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500 14) 	yield(get_tree().create_timer(2), "timeout")
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500 15) 	get_node("grey_cat_chilling").play("default")
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500 16) 
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500 17) 
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500 18) func _on_Timer_timeout():
+8256c790 (Sonaz 2022-11-10 08:58:31 -0500 19) 	get_node("grey_cat_chilling").play("death")
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  1) extends TextureProgress
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  2) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  3) func _ready():
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  4) 	value = 100
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  5) 	tint_progress = Color(0.26, 0.77, 0.19, 1)
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  6) 	get_node("Timer").wait_time = 200
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  7) 	get_node("Timer").start(get_node("Timer").wait_time)
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  8) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  9) func _process(delta):
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 10) 	value = (get_node("Timer").time_left / get_node("Timer").wait_time) * 100
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 11) 	if (value > 70):
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 12) 		tint_progress = Color(0.26, 0.77, 0.19, 1)
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 13) 	elif (value <= 70 && value > 50):
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 14) 		tint_progress = Color(0.88, 0.85, 0.21, 1)
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 15) 	elif (value <= 50 && value > 30):
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 16) 		tint_progress = Color(0.88, 0.65, 0.21, 1)
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 17) 	elif (value <= 30):
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 18) 		tint_progress = Color(0.88, 0.29, 0.21, 1)
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 19) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 20) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 21) func _on_Timer_timeout():
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 22) 	hide()
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 23) 	
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 24) 	
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 25) func _on_Button_pressed():
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 26) 	hide()
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500  1) extends Area2D
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500  2) var damage = 0
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500  3) 
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500  4) func _on_Button_pressed():
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500  5) 	set_monitoring(false)
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500  6) 	set_monitorable(false)
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500  7) 
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500  8) 
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500  9) func _on_Timer_timeout():
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500 10) 	set_monitoring(false)
+1716e2ee (Sonaz 2022-11-10 22:45:14 -0500 11) 	set_monitorable(false)
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  1) extends Popup
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  2) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  3) func _ready():
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  4) 	pass
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  5) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  6) ## popup menu show:
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  7) func _on_Area2D_body_entered(body):
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  8) 	if body is KinematicBody2D:
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500  9) 		if body.name == "Squango":
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 10) 			popup()
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 11) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 12) ## popup menu hide:
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 13) func _on_Area2D_body_exited(body):
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 14) 	if body is KinematicBody2D:
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 15) 		if body.name == "Squango":
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 16) 			hide()
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 17) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 18) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 19) func _on_Button_pressed():
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 20) 	hide()
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 21) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 22) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 23) func _on_Button2_pressed():
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 24) 	hide()
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 25) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 26) 
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 27) func _on_Timer_timeout():
+5ec59332 (Jazny 2022-11-09 14:29:03 -0500 28) 	hide()
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 1) extends Node2D
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 2) var damage = 0
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 3) 
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 4) func _on_Area2D_body_entered(body):
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 5) 	if body is KinematicBody2D:
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 6) 		if body.name == "Squango":
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 7) 			get_tree().change_scene("res://cat_dungeon.tscn")
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 1) extends Node2D
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 2) export var damage = 0
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 3) 
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 4) func _on_Area2D_body_entered(body):
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 5) 	if body is KinematicBody2D:
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 6) 		if body.name == "Squango":
+0c20206c (Sonaz 2022-11-08 11:36:04 -0500 7) 			get_tree().change_scene("res://bedroom_scene.tscn")
