@@ -1,0 +1,598 @@
+Inventory/Data/ItemData.json
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  3)      "ItemCategory": "Resource",
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  8)    "ItemCategory": "Resource",
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 13)    "ItemCategory": "Weapon",
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 14)    "ItemAttack": 1,
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 15)    "ItemSpeed": 0.75,
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 17)    "Description": "A keen and sharp blade that Squango had lying around for no particular reason."
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 18)    },
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 19)    "Catana": {
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 20)    "ItemCategory": "Weapon",
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 21)    "ItemAttack": 2.5,
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 22)    "ItemSpeed": 1,
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 23)    "StackSize": 1,
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 24)    "Description": "A strange weapon that purs for more murder"
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 25)    },
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 26)    "Catlass": {
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 27)    "ItemCategory": "Weapon",
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 28)    "ItemAttack": 5,
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 29)    "ItemSpeed": 0.25,
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 30)    "StackSize": 1,
+18421832 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:57:34 -0500 31)    "Description": "Arr, and the heavy swing of a catlass were the last thing that many buccaneers ever heard."
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 32)    },
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 33)    "MeowchineGun": {
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 34)    "ItemCategory": "Weapon",
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 35)    "ItemAttack": 0.33,
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 36)    "FireRate": 10,
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 37)    "StackSize": 1,
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 38)    "Description": "This is a tactical SAM, Squad Automatic Meowtillery"
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 39)    },
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 40)    "ACat-47": {
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 41)    "ItemCategory": "Weapon",
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 42)    "ItemAttack": 0.40,
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 43)    "FireRate": 7.5,
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 44)    "StackSize": 1,
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 45)    "Description": "Produced by the Soviet Union, this Meowtillery has seen war from Meowghanistan to  South Ameowrica. Meow."
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 46)    },
+Inventory/ACat-47.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  1) extends Node2D
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  2)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  3) var item_name
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  4) var item_quantity
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  5)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  6) func _ready():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  7)         item_name = "ACat-47"
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  8)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  9)         $TextureRect.texture = load("res://Inventory/Item_Icons/" + item_name + ".png")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 10)         var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 11)         item_quantity = randi() % stack_size + 1
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)         if stack_size == 1:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 14)                 $Label.visible = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 15)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 16)                 $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 17)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 18) func set_item(nm, qt):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 19)         item_name = nm
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 20)         item_quantity = qt
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 21)         $TextureRect.texture = load("res://Inventory/Item_Icons/" + item_name + ".png")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 22)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 23)         var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 24)         if stack_size == 1:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 25)                 $Label.visible = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 26)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 27)                 $Label.visible = true
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 28)                 $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 29)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 30) func add_item_quantity(amount_to_add):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 31)         item_quantity += amount_to_add
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 32)         $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 33)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 34) func decrease_item_quantity(amount_to_remove):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 35)         item_quantity -= amount_to_remove
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 36)         $Label.text = String(item_quantity)
+Inventory/ItemDropCatana.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  1) extends KinematicBody2D
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  2)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  3) const ACCELERATION = 460
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  4) const MAX_SPEED = 225
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  5) var velocity = Vector2.ZERO
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  6) var item_name
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  7)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  8) var player = null
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  9) var being_picked_up = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 10)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 11) func _ready():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)         item_name = "Catana"
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 14) func _physics_process(delta):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 15)         if being_picked_up == false:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 16)                 velocity = velocity.move_toward(Vector2(0, MAX_SPEED), ACCELERATION * delta)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 17)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 18)                 var direction = global_position.direction_to(player.global_position)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 19)                 velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 20)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 21)                 var distance = global_position.distance_to(player.global_position)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 22)                 if distance < 4:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 23)                         PlayerInventory.add_item(item_name, 1)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 24)                         queue_free()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 25)         velocity = move_and_slide(velocity, Vector2.UP)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 26)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 27) func pick_up_item(body):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 28)         player = body
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 29)         being_picked_up = true
+Inventory/ItemDropACat-47.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  1) extends KinematicBody2D
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  2)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  3) const ACCELERATION = 460
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  4) const MAX_SPEED = 225
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  5) var velocity = Vector2.ZERO
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  6) var item_name
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  7)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  8) var player = null
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  9) var being_picked_up = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 10)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 11) func _ready():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)         item_name = "ACat-47"
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 14) func _physics_process(delta):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 15)         if being_picked_up == false:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 16)                 velocity = velocity.move_toward(Vector2(0, MAX_SPEED), ACCELERATION * delta)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 17)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 18)                 var direction = global_position.direction_to(player.global_position)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 19)                 velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 20)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 21)                 var distance = global_position.distance_to(player.global_position)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 22)                 if distance < 4:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 23)                         PlayerInventory.add_item(item_name, 1)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 24)                         queue_free()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 25)         velocity = move_and_slide(velocity, Vector2.UP)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 26)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 27) func pick_up_item(body):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 28)         player = body
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 29)         being_picked_up = true
+Inventory/ItemDropCatlass.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  1) extends KinematicBody2D
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  2)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  3) const ACCELERATION = 460
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  4) const MAX_SPEED = 225
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  5) var velocity = Vector2.ZERO
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  6) var item_name
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  7)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  8) var player = null
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  9) var being_picked_up = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 10)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 11) func _ready():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)         item_name = "Catlass"
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 14) func _physics_process(delta):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 15)         if being_picked_up == false:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 16)                 velocity = velocity.move_toward(Vector2(0, MAX_SPEED), ACCELERATION * delta)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 17)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 18)                 var direction = global_position.direction_to(player.global_position)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 19)                 velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 20)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 21)                 var distance = global_position.distance_to(player.global_position)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 22)                 if distance < 4:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 23)                         PlayerInventory.add_item(item_name, 1)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 24)                         queue_free()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 25)         velocity = move_and_slide(velocity, Vector2.UP)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 26)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 27) func pick_up_item(body):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 28)         player = body
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 29)         being_picked_up = true
+Inventory/ItemDropMeowchineGun.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  1) extends KinematicBody2D
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  2)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  3) const ACCELERATION = 460
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  4) const MAX_SPEED = 225
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  5) var velocity = Vector2.ZERO
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  6) var item_name
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  7)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  8) var player = null
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  9) var being_picked_up = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 10)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 11) func _ready():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)         item_name = "MeowchineGun"
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 14) func _physics_process(delta):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 15)         if being_picked_up == false:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 16)                 velocity = velocity.move_toward(Vector2(0, MAX_SPEED), ACCELERATION * delta)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 17)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 18)                 var direction = global_position.direction_to(player.global_position)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 19)                 velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 20)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 21)                 var distance = global_position.distance_to(player.global_position)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 22)                 if distance < 4:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 23)                         PlayerInventory.add_item(item_name, 1)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 24)                         queue_free()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 25)         velocity = move_and_slide(velocity, Vector2.UP)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 26)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 27) func pick_up_item(body):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 28)         player = body
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 29)         being_picked_up = true
+Inventory/MeowchineGun.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  1) extends Node2D
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  2)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  3) var item_name
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  4) var item_quantity
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  5)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  6) func _ready():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  7)         item_name = "MeowchineGun"
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  8)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  9)         $TextureRect.texture = load("res://Inventory/Item_Icons/" + item_name + ".png")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 10)         var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 11)         item_quantity = randi() % stack_size + 1
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)         if stack_size == 1:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 14)                 $Label.visible = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 15)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 16)                 $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 17)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 18) func set_item(nm, qt):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 19)         item_name = nm
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 20)         item_quantity = qt
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 21)         $TextureRect.texture = load("res://Inventory/Item_Icons/" + item_name + ".png")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 22)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 23)         var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 24)         if stack_size == 1:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 25)                 $Label.visible = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 26)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 27)                 $Label.visible = true
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 28)                 $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 29)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 30) func add_item_quantity(amount_to_add):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 31)         item_quantity += amount_to_add
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 32)         $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 33)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 34) func decrease_item_quantity(amount_to_remove):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 35)         item_quantity -= amount_to_remove
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 36)         $Label.text = String(item_quantity)
+Inventory/Catana_Item.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  1) extends Node2D
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  2)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  3) var item_name
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  4) var item_quantity
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  5)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  6) func _ready():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  7)         item_name = "Catana"
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  8)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  9)         $TextureRect.texture = load("res://Inventory/Item_Icons/" + item_name + ".png")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 10)         var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 11)         item_quantity = randi() % stack_size + 1
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)         if stack_size == 1:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 14)                 $Label.visible = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 15)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 16)                 $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 17)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 18) func set_item(nm, qt):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 19)         item_name = nm
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 20)         item_quantity = qt
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 21)         $TextureRect.texture = load("res://Inventory/Item_Icons/" + item_name + ".png")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 22)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 23)         var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 24)         if stack_size == 1:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 25)                 $Label.visible = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 26)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 27)                 $Label.visible = true
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 28)                 $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 29)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 30) func add_item_quantity(amount_to_add):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 31)         item_quantity += amount_to_add
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 32)         $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 33)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 34) func decrease_item_quantity(amount_to_remove):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 35)         item_quantity -= amount_to_remove
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 36)         $Label.text = String(item_quantity)
+Inventory/Catlass_Item.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  1) extends Node2D
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  2)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  3) var item_name
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  4) var item_quantity
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  5)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  6) func _ready():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  7)         item_name = "Catlass"
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  8)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  9)         $TextureRect.texture = load("res://Inventory/Item_Icons/" + item_name + ".png")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 10)         var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 11)         item_quantity = randi() % stack_size + 1
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)         if stack_size == 1:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 14)                 $Label.visible = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 15)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 16)                 $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 17)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 18) func set_item(nm, qt):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 19)         item_name = nm
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 20)         item_quantity = qt
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 21)         $TextureRect.texture = load("res://Inventory/Item_Icons/" + item_name + ".png")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 22)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 23)         var stack_size = int(JsonData.item_data[item_name]["StackSize"])
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 24)         if stack_size == 1:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 25)                 $Label.visible = false
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 26)         else:
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 27)                 $Label.visible = true
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 28)                 $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 29)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 30) func add_item_quantity(amount_to_add):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 31)         item_quantity += amount_to_add
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 32)         $Label.text = String(item_quantity)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 33)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 34) func decrease_item_quantity(amount_to_remove):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 35)         item_quantity -= amount_to_remove
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 36)         $Label.text = String(item_quantity)
+PlayerInventory.gd
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500   3) signal active_item_updated
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500   4)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500   7) const NUM_INVENTORY_SLOTS = 56
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500   8) const NUM_HOTBAR_SLOTS = 8
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500   9)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  10) var active_item_slot = 0
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  11)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  17) var hotbar = {
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  18)        0: ["Tree Branch", 1],  #--> slot_index: [item_name, item_quantity]
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  19) }
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  20)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  21) var equips = {
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  22) }
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  23)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  24)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  52)        match slot.slotType:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  53)                SlotClass.SlotType.HOTBAR:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  54)                        hotbar.erase(slot.slot_index)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  55)                SlotClass.SlotType.INVENTORY:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  56)                        inventory.erase(slot.slot_index)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  57)                _:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  58)                        equips.erase(slot.slot_index)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  59)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  62)        match slot.slotType:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  63)                SlotClass.SlotType.HOTBAR:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  64)                        hotbar[slot.slot_index] = [Item.item_name, Item.item_quantity]
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  65)                SlotClass.SlotType.INVENTORY:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  66)                        inventory[slot.slot_index] = [Item.item_name, Item.item_quantity]
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  67)                _:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  68)                        equips[slot.slot_index] = [Item.item_name, Item.item_quantity]
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  71)        match slot.slotType:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  72)                SlotClass.SlotType.HOTBAR:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  73)                        hotbar[slot.slot_index][1] += quantity_to_add
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  74)                SlotClass.SlotType.INVENTORY:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  75)                        inventory[slot.slot_index][1] += quantity_to_add
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  76)                _:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  77)                        equips[slot.slot_index][1] += quantity_to_add
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  78)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  79) func active_item_scroll_up() -> void:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  80)        active_item_slot = (active_item_slot + 1) % NUM_HOTBAR_SLOTS
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  81)        emit_signal("active_item_updated")
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  82)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  83) func active_item_scroll_down() -> void:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  84)        if active_item_slot == 0:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  85)                active_item_slot = NUM_HOTBAR_SLOTS - 1
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  86)        else:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  87)                active_item_slot -= 1
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  88)        emit_signal("active_item_updated")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  89)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  90) func active_item_1():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  91)        active_item_slot = 0
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  92)        emit_signal("active_item_updated")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  93)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  94) func active_item_2():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  95)        active_item_slot = 1
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  96)        emit_signal("active_item_updated")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  97)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  98) func active_item_3():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  99)        active_item_slot = 2
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 100)        emit_signal("active_item_updated")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 101)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 102) func active_item_4():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 103)        active_item_slot = 3
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 104)        emit_signal("active_item_updated")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 105)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 106) func active_item_5():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 107)        active_item_slot = 4
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 108)        emit_signal("active_item_updated")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 109)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 110) func active_item_6():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 111)        active_item_slot = 5
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 112)        emit_signal("active_item_updated")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 113)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 114) func active_item_7():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 115)        active_item_slot = 6
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 116)        emit_signal("active_item_updated")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 117)
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 118) func active_item_8():
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 119)        active_item_slot = 7
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 120)        emit_signal("active_item_updated")
+caged_grey_cat.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  2) const Catana = preload("res://Inventory/ItemDropCatana.tscn")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)         var catana = Catana.instance()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)         get_parent().add_child(catana)
+caged_creme_cat.gd
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500  3) const Catlass = preload("res://Inventory/ItemDropCatlass.tscn")
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 12)         var catlass = Catlass.instance()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 13)         get_parent().add_child(catlass)
+Inventory.gd
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500   5) onready var equip_slots = $EquipSlots.get_children()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500   6)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  13)                slots[i].slotType = SlotClass.SlotType.INVENTORY
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  14)        for i in range(equip_slots.size()):
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  15)                equip_slots[i].connect("gui_input", self, "slot_gui_input", [equip_slots[i]])
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  16)                equip_slots[i].slot_index = i
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  17)        equip_slots[0].slotType = SlotClass.SlotType.SHIRT
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  18)        equip_slots[1].slotType = SlotClass.SlotType.PANTS
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  19)        equip_slots[2].slotType = SlotClass.SlotType.SHOES
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500  20)        equip_slots[3].slotType = SlotClass.SlotType.WEAPONS
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  21)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  23)        initialize_equips()
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  31) func initialize_equips():
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  32)        for i in range(equip_slots.size()):
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  33)                if PlayerInventory.equips.has(i):
+b630636a (U-LAPTOP-U4L9DA93\conom 2022-11-29 16:02:30 -0500  34)                        equip_slots[i].intialize_item(PlayerInventory.equips[i][0], PlayerInventory.equips[i][1])
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  35)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  39)                        if find_parent("HUD").holding_item != null:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  43)                                        if find_parent("HUD").holding_item.item_name != slot.Item.item_name:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  50) func able_to_put_into_slot(slot: SlotClass):
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  51)        var holding_item = find_parent("HUD").holding_item
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  52)        if holding_item == null:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  53)                return true
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  54)        var holding_item_category = JsonData.item_data[holding_item.item_name]["ItemCategory"]
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  55)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  56)        if slot.slotType == SlotClass.SlotType.SHIRT:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  57)                return holding_item_category == "Shirt"
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  58)        elif slot.slotType == SlotClass.SlotType.PANTS:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  59)                return holding_item_category == "Pants"
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  60)        elif slot.slotType == SlotClass.SlotType.SHOES:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  61)                return holding_item_category == "Shoes"
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500  62)        elif slot.slotType == SlotClass.SlotType.WEAPONS:
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500  63)                return holding_item_category == "Weapon"
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  64)        return true
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  65)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  67)        if able_to_put_into_slot(slot):
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  68)                PlayerInventory.add_item_to_empty_slot(find_parent("HUD").holding_item, slot)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  69)                slot.put_into_slot(find_parent("HUD").holding_item)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  70)                find_parent("HUD").holding_item = null
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  73)        if able_to_put_into_slot(slot):
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  74)                PlayerInventory.remove_item(slot)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  75)                PlayerInventory.add_item_to_empty_slot(find_parent("HUD").holding_item, slot)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  76)                var temp_item = slot.Item
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  77)                slot.pick_from_slot()
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  78)                temp_item.global_position = event.global_position
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  79)                slot.put_into_slot(find_parent("HUD").holding_item)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  80)                find_parent("HUD").holding_item = temp_item
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  83)        if able_to_put_into_slot(slot):
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  84)                var stack_size = int(JsonData.item_data[slot.Item.item_name]["StackSize"])
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  85)                var able_to_add = stack_size - slot.Item.item_quantity
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  86)                if able_to_add >= find_parent("HUD").holding_item.item_quantity:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  87)                        PlayerInventory.add_item_quantity(slot, find_parent("HUD").holding_item.item_quantity)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  88)                        slot.Item.add_item_quantity(find_parent("HUD").holding_item.item_quantity)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  89)                        find_parent("HUD").holding_item.queue_free()
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  90)                        find_parent("HUD").holding_item = null
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  91)                else:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  92)                        PlayerInventory.add_item_quantity(slot, able_to_add)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  93)                        slot.Item.add_item_quantity(able_to_add)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  94)                        find_parent("HUD").holding_item.decrease_item_quantity(able_to_add)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  98)        find_parent("HUD").holding_item = slot.Item
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 100)        find_parent("HUD").holding_item.global_position = get_global_mouse_position()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 103)        if find_parent("HUD").holding_item:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 104)                find_parent("HUD").holding_item.global_position = get_global_mouse_position()
+Inventory_Panel.gd
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  5) var selected_tex = preload("res://Inventory/item_slot_selected_background.png") #This line is new
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  7)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500  8) var selected_style: StyleBoxTexture = null #This line is new
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 15) #Everything to the next comment needs to be added
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 16) enum SlotType {
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 17)         HOTBAR = 0,
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 18)         INVENTORY,
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 19)         SHIRT,
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 20)         PANTS,
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 21)         SHOES,
+6a17f708 (U-LAPTOP-U4L9DA93\conom 2022-11-29 10:30:02 -0500 22)         WEAPONS,
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 23) }
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 24) var slotType = null
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 25) # Called when the node enters the scene tree for the first time, so everything above this comment.
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 29)         selected_style = StyleBoxTexture.new()#This probably needs to be added
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 33)         selected_style.texture = selected_tex#This also porbably needs to be added
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 38)         if slotType == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot_index: #This if statement needs to be there
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 39)                 set('custom_styles/panel', selected_style) #This needs to be there
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 40)         elif Item == null:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 41)                 set('custom_styles/panel', empty_style) #This, for you, needs to be changed from an if to an elif
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 43)                 set('custom_styles/panel', default_style)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 47)         var InventoryNode = find_parent("HUD") #Needs to be added
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 55)         var InventoryNode = find_parent("HUD") #Needs to be added
+CharMovement2.gd
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 138)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 139) func _input(event):
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 140)        if event.is_action_pressed("pickup"):
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 141)                if $PickupZone.items_in_range.size() > 0:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 142)                        var pickup_item = $PickupZone.items_in_range.values()[0]
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 143)                        pickup_item.pick_up_item(self)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 144)                        $PickupZone.items_in_range.erase(pickup_item)
+Hotbar.gd
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  1) extends Node2D
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  2)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  3) const SlotClass = preload("Inventory_Panel.gd")
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  4) onready var hotbar_slots = $HotbarSlots
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  5) onready var active_item_label = $ActiveItemLabel
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  6) onready var slots = hotbar_slots.get_children()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  7)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  8) func _ready():
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  9) #       for i in range(slots.size()):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 10) #               slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 11) #               slots[i].slot_index = i
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 12)         PlayerInventory.connect("active_item_updated", self, "update_active_item_label")
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 13)         for i in range(slots.size()):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 14)                 PlayerInventory.connect("active_item_updated", slots[i], "refresh_style")
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 15)                 slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 16)                 slots[i].slotType = SlotClass.SlotType.HOTBAR
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 17)                 slots[i].slot_index = i
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 18)         initialize_hotbar()
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 19)         update_active_item_label()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 20)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 21) func update_active_item_label():
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 22)         if slots[PlayerInventory.active_item_slot].Item != null:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 23)                 active_item_label.text = slots[PlayerInventory.active_item_slot].Item.item_name
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 24)         else:
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 25)                 active_item_label.text = ""
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 26)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 27) func initialize_hotbar():
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 28)         for i in range(slots.size()):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 29)                 if PlayerInventory.hotbar.has(i):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 30)                         slots[i].intialize_item(PlayerInventory.hotbar[i][0], PlayerInventory.hotbar[i][1])
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 31)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 32) func _input(event):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 33)         if find_parent("HUD").holding_item:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 34)                 find_parent("HUD").holding_item.global_position = get_global_mouse_position()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 35)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 36) func slot_gui_input(event: InputEvent, slot: SlotClass):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 37)         if event is InputEventMouseButton:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 38)                 if event.button_index == BUTTON_LEFT && event.pressed:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 39)                         if find_parent("HUD").holding_item != null:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 40)                                 if !slot.Item:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 41)                                         left_click_empty_slot(slot)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 42)                                 else:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 43)                                         if find_parent("HUD").holding_item.item_name != slot.Item.item_name:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 44)                                                 left_click_different_item(event, slot)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 45)                                         else:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 46)                                                 left_click_same_item(slot)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 47)                         elif slot.Item:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 48)                                 left_click_not_holding(slot)
+430696cf (U-LAPTOP-U4L9DA93\conom 2022-11-28 21:51:03 -0500 49)                         update_active_item_label()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 50)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 51) func left_click_empty_slot(slot: SlotClass):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 52)         PlayerInventory.add_item_to_empty_slot(find_parent("HUD").holding_item, slot)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 53)         slot.put_into_slot(find_parent("HUD").holding_item)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 54)         find_parent("HUD").holding_item = null
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 55)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 56) func left_click_different_item(event: InputEvent, slot: SlotClass):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 57)         PlayerInventory.remove_item(slot)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 58)         PlayerInventory.add_item_to_empty_slot(find_parent("HUD").holding_item, slot)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 59)         var temp_item = slot.item
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 60)         slot.pickFromSlot()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 61)         temp_item.global_position = event.global_position
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 62)         slot.putIntoSlot(find_parent("HUD").holding_item)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 63)         find_parent("HUD").holding_item = temp_item
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 64)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 65) func left_click_same_item(slot: SlotClass):
+fc1015e3 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:37:43 -0500 66)         var stack_size = int(JsonData.item_data[slot.Item.item_name]["StackSize"])
+fc1015e3 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:37:43 -0500 67)         var able_to_add = stack_size - slot.Item.item_quantity
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 68)         if able_to_add >= find_parent("HUD").holding_item.item_quantity:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 69)                 PlayerInventory.add_item_quantity(slot, find_parent("HUD").holding_item.item_quantity)
+fc1015e3 (U-LAPTOP-U4L9DA93\conom 2022-11-29 09:37:43 -0500 70)                 slot.Item.add_item_quantity(find_parent("HUD").holding_item.item_quantity)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 71)                 find_parent("HUD").holding_item.queue_free()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 72)                 find_parent("HUD").holding_item = null
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 73)         else:
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 74)                 PlayerInventory.add_item_quantity(slot, able_to_add)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 75)                 slot.item.add_item_quantity(able_to_add)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 76)                 find_parent("HUD").holding_item.decrease_item_quantity(able_to_add)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 77)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 78) func left_click_not_holding(slot: SlotClass):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 79)         PlayerInventory.remove_item(slot)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 80)         find_parent("HUD").holding_item = slot.Item
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 81)         slot.pick_from_slot()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 82)         find_parent("HUD").holding_item.global_position = get_global_mouse_position()
+HUD.gd
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  4) var holding_item = null
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  5)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500  6)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 11)
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 12)         if event.is_action_pressed("scroll_up"):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 13)                 PlayerInventory.active_item_scroll_down()
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 14)         elif event.is_action_pressed("scroll_down"):
+ff1d7830 (U-LAPTOP-U4L9DA93\conom 2022-11-28 14:05:57 -0500 15)                 PlayerInventory.active_item_scroll_up()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 16)         elif event.is_action_pressed("Hotbar_Slot_1"):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 17)                 PlayerInventory.active_item_1()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 18)         elif event.is_action_pressed("Hotbar_Slot_2"):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 19)                 PlayerInventory.active_item_2()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 20)         elif event.is_action_pressed("Hotbar_Slot_3"):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 21)                 PlayerInventory.active_item_3()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 22)         elif event.is_action_pressed("Hotbar_Slot_4"):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 23)                 PlayerInventory.active_item_4()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 24)         elif event.is_action_pressed("Hotbar_Slot_5"):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 25)                 PlayerInventory.active_item_5()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 26)         elif event.is_action_pressed("Hotbar_Slot_6"):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 27)                 PlayerInventory.active_item_6()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 28)         elif event.is_action_pressed("Hotbar_Slot_7"):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 29)                 PlayerInventory.active_item_7()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 30)         elif event.is_action_pressed("Hotbar_Slot_8"):
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 31)                 PlayerInventory.active_item_8()
+6faea8b6 (U-LAPTOP-U4L9DA93\conom 2022-11-29 15:50:56 -0500 32)
