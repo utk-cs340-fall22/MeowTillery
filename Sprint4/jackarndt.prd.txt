@@ -1,0 +1,24 @@
+Product Requirements Document
+Name: Jack Arndt
+
+Product Name: Meowtillery
+
+## Background
+2D platformers are a popular video game format. Introducing a comedic premise with entertaining combat systems should prove to be great fun for all users.
+
+Project Overview
+Meowtillery is a 2D pixel combat story game about a protagonist named Squango who takes over working a Cat Cafe and has to defend it from the clutches of PYTA.
+Create and upgrade cat-based weapons to defend against multiple waves and bosses.
+
+Features
+1. As a player, I want to have an introductory cutscene to understand the story behind the game.
+2. As a player, I want to be able to yield weapons to fight enemies
+3. As a player, I want a variety of enemies
+4. As a player, I want to be able to upgrade and obtain new weapons
+5. As a player, I want to have a camera which follows me through multiple environments
+6. As a player, I want to be able to heal after taking damage from combat
+7. As a developer, I don't want the player to be able to exit the battle stage at will
+8. As a developer, I don't want the player to find easy exploits by reaching out of bounds areas
+
+## Technologies to be used
+The game development software Godot will be used to implement this project. It uses a similar language to Python in order to create playable worlds.
