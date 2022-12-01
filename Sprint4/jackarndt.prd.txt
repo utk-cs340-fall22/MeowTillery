@@ -7,8 +7,8 @@ Product Name: Meowtillery
 2D platformers are a popular video game format. Introducing a comedic premise with entertaining combat systems should prove to be great fun for all users.
 
 Project Overview
-Meowtillery is a 2D pixel combat story game about a protagonist named Squango who takes over working a Cat Cafe and has to defend it from the clutches of PYTA.
-Create and upgrade cat-based weapons to defend against multiple waves and bosses.
+MeowTillery is a fast-paced 2D action game. This game utilizes a wide variety of enemies including bosses all with interesting designs. This game relies on a dual management and action gameplay loop. This loop revolves around balancing out your ability to make money and level up cats to facilitate further upgrades to your defenses. However, you can also raise your cats themselves to become fearsome weapons. These weapons are each unique to each cat, and can be cultivated via increasing their level. However, losing out on high levelled cats will cause you to lose money and potentially increase defenses. This unique balancing act keeps players engaged and motivated to keep going through this gameplay loop.
+Now, this is all occurring behind the backdrop of an engaging story which focuses on the journey of Squango, an unfortunate outcast and misfit, who earns the Cat Cafe via a brutal life and death struggle. Now, having gotten the Cafe, Squango will face all new challenges from within his new community as many new members won't accept him as a member. Thus, Squango must brutally carve a path through his many enemies and various opponents to finally become truly free to be a part of the community and to make it as a cat cafe owner.
 
 Features
 1. As a player, I want to have an introductory cutscene to understand the story behind the game.
