@@ -1,0 +1,25 @@
+# Product Requirements Document
+
+Name: Sean Kerzel
+
+Product Name: MeowTillery
+
+Background
+Pixel games have always be a staple in the gaming world, typically labeled as "Classics" as a lot of the early games were 8-bit and designed this way. A lot of these games are still around and recognized as fun and enjoyable games. Meowtillery it a pixel platformer that targets this audience of the popular genre. Some of the appeals of Meowtillery are that it appeals to cat lovers, as everything is cat themed. It appeals to the genre of fasted paced action platformers which take up the role of either very difficult or very memorable types of games like Celeste and Hollow Knight. These types of games, even when they are quite diffictult, can sometimes give off a calming feeling as you explore the world and fight new types of enemies and just enjoy the game overall. Meowtillery combines a lot of the exciting genres that are popular in the gaming industry and is aiming to pull in those types of gamers that like these pixel platformer games.
+
+Project Overview
+MeowTillery is a fast-paced 2D action game. This game utilizes a wide variety of enemies including bosses all with interesting designs. This game relies on a dual management and action gameplay loop. This loop revolves around balancing out your ability to make money and level up cats to facilitate further upgrades to your defenses. However, you can also raise your cats themselves to become fearsome weapons. These weapons are each unique to each cat, and can be cultivated via increasing their level. However, losing out on high levelled cats will cause you to lose money and potentially increase defenses. This unique balancing act keeps players engaged and motivated to keep going through this gameplay loop.
+Now, this is all occurring behind the backdrop of an engaging story which focuses on the journey of Squango, an unfortunate outcast and misfit, who earns the Cat Cafe via a brutal life and death struggle. Now, having gotten the Cafe, Squango will face all new challenges from within his new community as many new members won't accept him as a member. Thus, Squango must brutally carve a path through his many enemies and various opponents to finally become truly free to be a part of the community and to make it as a cat cafe owner.
+
+Features
+As a player, I want to have a health system to give the game a challenge
+As a player, I want the health and damages to be somewhat fair so the game doesn't seem broken
+As a player, I want to be able to damage the enemies myself and kill them
+As a developer, I want to have transferable health systems so we can use them to make health systems for new enemies to be added
+As a player, I want an external threat outside of taking too much damage, in the form of sanity, to make the game a little more fast paced
+As a player, I want not be able to replenish sanity until I've killed a wave so I have a timer and a sense of urgency
+As a player, I want the enemies to have different patterns and healths so I feel like I'm playing unique gameplay
+As a developer, I want the player to interact with the cats, so that they may confront moral conflicts and dilemmas when changing cats into weapons, so that they may get further interested in the game and setting.
+
+Technologies to be used
+The main programming language is Godot's GDScript, which is used for the majority of the game design. JSON is also used within some of the Godot coding for managing the inventory system. There is also plenty that it used from Godot's extended libraries for design as well.
