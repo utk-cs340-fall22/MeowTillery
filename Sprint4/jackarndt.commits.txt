@@ -1,0 +1,296 @@
+Kendall_Jenner.gd
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500  77) 	WaveTracker.enemiesRemaining -= 1
+
+Robert_Scrum.gd
+4e4c6d60 (jackarndt               2022-11-30 12:23:30 -0500 102) 	WaveTracker.enemiesRemaining -= 1
+
+SpawnSystem.gd
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500   1) extends Node2D
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500   2) 
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500   3) 
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500   4) # Declare member variables here
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500   5) 
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500   6) var minion = preload("res://minion.tscn")
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500   7) var jenner = preload("res://Kendall_Jenner.tscn")
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500   8) var scrum = preload("res://Robert_Scrum.tscn")
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500   9) var ingrid = preload("res://Ingrid.tscn")
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  10) var turret = preload("res://Turret.tscn")
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  13) var doorBlock = preload("res://DoorBlocker.tscn")
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  14) var wavestarted = 0
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  15) var blockFreed = 0
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  16) 
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500  17) onready var block = doorBlock.instance()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500  18) onready var turret1 = turret.instance()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500  19) onready var turret2 = turret.instance()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500  20) onready var turret3 = turret.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  21) 
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  22) # Called when the node enters the scene tree for the first time.
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  23) func _ready():
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  24) 	wavestarted = 0
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500  25) 	_newWave()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  26) 
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500  27) func _newWave():
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  28) 	
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500  29) 	match(WaveTracker.waveNum):
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  30) 		1:
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  31) 			var minion1 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  32) 			var minion2 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  33) 			var minion3 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  34) 			var minion4 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  35) 			var minion5 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  36) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  37) 			minion1.position = Vector2(-300, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  38) 			minion2.position = Vector2(-350, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  39) 			minion3.position = Vector2(-400, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  40) 			minion4.position = Vector2(400, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  41) 			minion5.position = Vector2(450, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  42) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  43) 			minion1.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  44) 			minion1.scale.x = -minion1.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  45) 			minion2.is_moving_right = true
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  46) 			minion2.scale.x = -minion2.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  47) 			minion3.is_moving_right = true
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  48) 			minion3.scale.x = -minion3.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  49) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  50) 			add_child(minion1)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  51) 			add_child(minion2)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  52) 			add_child(minion3)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  53) 			add_child(minion4)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  54) 			add_child(minion5)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  55) 			
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500  56) 			WaveTracker.enemiesRemaining = 5
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500  57) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  58) 		2:
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  59) 			var minion1 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  60) 			var minion2 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  61) 			var minion3 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  62) 			var jenner1 = jenner.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  63) 			var jenner2 = jenner.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  64) 			var jenner3 = jenner.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  65) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  66) 			minion1.position = Vector2(-200, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  67) 			minion2.position = Vector2(-250, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  68) 			minion3.position = Vector2(-300, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  69) 			jenner1.position = Vector2(-350, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  70) 			jenner2.position = Vector2(-400, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  71) 			jenner3.position = Vector2(-150, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  72) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  73) 			minion1.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  74) 			minion1.scale.x = -minion1.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  75) 			minion2.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  76) 			minion2.scale.x = -minion2.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  77) 			minion3.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  78) 			minion3.scale.x = -minion3.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  79) 			jenner1.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  80) 			jenner1.scale.x = -jenner1.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  81) 			jenner2.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  82) 			jenner2.scale.x = -jenner2.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  83) 			jenner3.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  84) 			jenner3.scale.x = -jenner3.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  85) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  86) 			add_child(minion1)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  87) 			add_child(minion2)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  88) 			add_child(minion3)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  89) 			add_child(jenner1)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  90) 			add_child(jenner2)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  91) 			add_child(jenner3)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  92) 			
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500  93) 			WaveTracker.enemiesRemaining = 6
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  94) 		3:
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  95) 			var minion1 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  96) 			var minion2 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  97) 			var minion3 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  98) 			var minion4 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500  99) 			var minion5 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 100) 			var robert = scrum.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 101) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 104) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 105) 			minion1.position = Vector2(-200, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 106) 			minion2.position = Vector2(-250, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 107) 			minion3.position = Vector2(-300, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 108) 			robert.position = Vector2(-350, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 109) 			minion4.position = Vector2(-390, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 110) 			minion5.position = Vector2(-425, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 112) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 113) 			minion1.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 114) 			minion1.scale.x = -minion1.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 115) 			minion2.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 116) 			minion2.scale.x = -minion2.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 117) 			minion3.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 118) 			minion3.scale.x = -minion3.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 119) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 120) 			add_child(minion1)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 121) 			add_child(minion2)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 122) 			add_child(minion3)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 123) 			add_child(minion4)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 124) 			add_child(minion5)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 125) 			add_child(robert)
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500 133) 			WaveTracker.enemiesRemaining = 6
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 135) 		4:
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 136) 			var minion1 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 137) 			var minion2 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 138) 			var minion3 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 139) 			var minion4 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 140) 			var minion5 = minion.instance()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 141) 			var minion6 = minion.instance()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 142) 			var minion7 = minion.instance()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 143) 			var minion8 = minion.instance()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 144) 			var minion9 = minion.instance()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 145) 			var minion10 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 146) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 147) 			minion1.position = Vector2(-200, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 148) 			minion2.position = Vector2(-250, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 149) 			minion3.position = Vector2(-300, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 150) 			minion4.position = Vector2(-350, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 151) 			minion5.position = Vector2(-400, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 152) 			minion6.position = Vector2(-150, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 153) 			minion7.position = Vector2(-100, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 154) 			minion8.position = Vector2(-50, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 155) 			minion9.position = Vector2(0, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 156) 			minion10.position = Vector2(50, 60)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 157) 
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 158) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 159) 			minion1.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 160) 			minion1.scale.x = -minion1.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 161) 			minion3.is_moving_right = true
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 162) 			minion3.scale.x = -minion2.scale.x
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 163) 			minion5.is_moving_right = true
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 164) 			minion5.scale.x = -minion3.scale.x
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 165) 			minion7.is_moving_right = true
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 166) 			minion7.scale.x = -minion1.scale.x
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 167) 			minion9.is_moving_right = true
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 168) 			minion9.scale.x = -minion2.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 169) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 170) 			add_child(minion1)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 171) 			add_child(minion2)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 172) 			add_child(minion3)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 173) 			add_child(minion4)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 174) 			add_child(minion5)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 175) 			add_child(minion6)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 176) 			add_child(minion7)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 177) 			add_child(minion8)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 178) 			add_child(minion9)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 179) 			add_child(minion10)
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500 180) 			
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 181) 			WaveTracker.enemiesRemaining = 10
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 183) 		5:
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 184) 			var minion1 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 185) 			var minion2 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 186) 			var minion3 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 187) 			var minion4 = minion.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 188) 			var jenner1 = jenner.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 189) 			var jenner2 = jenner.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 190) 			var jenner3 = jenner.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 191) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 192) 			minion1.position = Vector2(-150, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 193) 			jenner1.position = Vector2(-200, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 194) 			minion2.position = Vector2(-250, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 195) 			jenner2.position = Vector2(-300, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 196) 			minion3.position = Vector2(-350, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 197) 			jenner3.position = Vector2(-375, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 198) 			minion4.position = Vector2(-400, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 199) 			turret1.position = Vector2(250, 0)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 200) 			turret2.position = Vector2(0, 0)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 201) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 202) 			minion1.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 203) 			minion1.scale.x = -minion1.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 204) 			minion2.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 205) 			minion2.scale.x = -minion2.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 206) 			minion3.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 207) 			minion3.scale.x = -minion3.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 208) 			minion4.is_moving_right = true
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 209) 			minion4.scale.x = -minion4.scale.x
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 210) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 211) 			add_child(minion1)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 212) 			add_child(minion2)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 213) 			add_child(minion3)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 214) 			add_child(minion4)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 215) 			add_child(jenner1)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 216) 			add_child(jenner2)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 217) 			add_child(jenner3)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 218) 			add_child(turret1)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 219) 			add_child(turret2)
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500 220) 			
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 221) 			WaveTracker.enemiesRemaining = 7
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 222) 		6:
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 223) 			#this should be robert scrum 2 btw
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 224) 			var robert = scrum.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 225) 			var jenner1 = jenner.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 226) 			var jenner2 = jenner.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 227) 			var jenner3 = jenner.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 228) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 229) 			robert.position = Vector2(-350, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 230) 			jenner1.position = Vector2(-200, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 231) 			jenner2.position = Vector2(-300, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 232) 			jenner3.position = Vector2(-375, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 233) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 234) 			add_child(jenner1)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 235) 			add_child(jenner2)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 236) 			add_child(jenner3)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 237) 			add_child(robert)
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500 238) 			
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 239) 			WaveTracker.enemiesRemaining = 4
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 240) 		7:
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 241) 			var TheIngrid = ingrid.instance()
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 243) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 244) 			TheIngrid.position = Vector2(-350, 60)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 246) 			
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 247) 			add_child(TheIngrid)
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 251) 			
+6775c597 (jackarndt   2022-11-28 21:20:12 -0500 252) 			WaveTracker.enemiesRemaining = 1
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 253) 
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 254) 
+9fbf30ff (jackarndt   2022-11-27 21:28:31 -0500 255) func _process(delta):
+356d615f (jackarndt   2022-11-28 23:18:26 -0500 256) 	if (!wavestarted):
+356d615f (jackarndt   2022-11-28 23:18:26 -0500 257) 		block.position = Vector2(475,115)
+356d615f (jackarndt   2022-11-28 23:18:26 -0500 258) 		add_child(block)
+356d615f (jackarndt   2022-11-28 23:18:26 -0500 259) 		wavestarted = 1
+356d615f (jackarndt   2022-11-28 23:18:26 -0500 260) 		
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 261) 		if (WaveTracker.waveNum == 4 || WaveTracker.waveNum == 5):
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 262) 			turret1.position = Vector2(250, 0)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 263) 			turret2.position = Vector2(0, 0)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 264) 			add_child(turret1)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 265) 			add_child(turret2)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 266) 			
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 267) 		elif (WaveTracker.waveNum == 6):
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 268) 			turret1.position = Vector2(250, 0)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 269) 			turret2.position = Vector2(0, 0)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 270) 			turret3.position = Vector2(-250, 0)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 271) 			add_child(turret1)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 272) 			add_child(turret2)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 273) 			add_child(turret3)
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 274) 		
+356d615f (jackarndt   2022-11-28 23:18:26 -0500 275) 	if (WaveTracker.enemiesRemaining == 0 && !blockFreed):
+356d615f (jackarndt   2022-11-28 23:18:26 -0500 276) 		print("wave cleared")
+356d615f (jackarndt   2022-11-28 23:18:26 -0500 277) 		block.queue_free()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 278) 		if (WaveTracker.waveNum == 4 || WaveTracker.waveNum == 5):
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 279) 			turret1.queue_free()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 280) 			turret2.queue_free()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 281) 		elif(WaveTracker.waveNum == 6):
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 282) 			turret1.queue_free()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 283) 			turret2.queue_free()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 284) 			turret3.queue_free()
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 285) 			
+4e4c6d60 (jackarndt   2022-11-30 12:23:30 -0500 286) 		WaveTracker.waveNum += 1
+356d615f (jackarndt   2022-11-28 23:18:26 -0500 287) 		blockFreed = 1
+
+caged_creme_cat.gd
+4e4c6d60 (jackarndt               2022-11-30 12:23:30 -0500 14) 	WaveTracker.waveNum = 1
+
+caged_grey_cat.gd
+4e4c6d60 (jackarndt               2022-11-30 12:23:30 -0500 14) 	WaveTracker.waveNum = 1
+
+minion.gd
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  75) 	WaveTracker.enemiesRemaining -= 1
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  76) 	print("enemies remaining: ", WaveTracker.enemiesRemaining)
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  94) 		WaveTracker.enemiesRemaining -= 1
+356d615f (jackarndt   2022-11-28 23:18:26 -0500  95) 		print("enemies remaining: ", WaveTracker.enemiesRemaining)
+
+project.godot
+356d615f (jackarndt               2022-11-28 23:18:26 -0500  50) WaveTracker="*res://wave_tracker.gd"
+
+wave_tracker.gd
+6775c597 (jackarndt 2022-11-28 21:20:12 -0500 1) extends Node
+6775c597 (jackarndt 2022-11-28 21:20:12 -0500 2) 
+4e4c6d60 (jackarndt 2022-11-30 12:23:30 -0500 3) var waveNum = 0
+6775c597 (jackarndt 2022-11-28 21:20:12 -0500 4) var enemiesRemaining = 0
