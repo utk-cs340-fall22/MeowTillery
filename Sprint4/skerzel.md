@@ -43,14 +43,7 @@ Files worked on:
 - Meowtillary/RigidBody2D.gd 
 - Meowtillary/Robert_Scrum_Stats.gd 
 - Meowtillary/Robert_Scrum_Stats.tscn 
-- Meowtillary/SanityBar.gd 
-- Meowtillary/SanityBar.tscn 
-- Meowtillary/Entrance.gd 
-- Meowtillary/HUD.tscn 
-- Meowtillary/PlayerDetector.gd 
-- Meowtillary/SquangoSeeker.gd 
-- Meowtillary/background_testing.tscn 
-- Meowtillary/cat_dungeon.tscn
+
 
 Finished: 
 - Have a randomly spawning health replenishing food in the fighting level 
