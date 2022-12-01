@@ -5,9 +5,13 @@ MeowTillery
 
 ## Files I worked on
 I worked on many files this sprint, but the four major ones are:
+
 intro_quip.gd
+
 cats_global.gd
+
 caged_grey_cat.gd
+
 caged_creme_cat.gd
 
 ## What I accomplished
