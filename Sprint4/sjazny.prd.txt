@@ -1,0 +1,20 @@
+Name: Sonaz Jazny
+Product: MeowTillery
+
+Background:
+In the ever-growing game community, indie games have become a big frontier for novel and interesting games. With the rise of Godot, Unity, and various other game development software, it is easier now, more than ever, for a developer to dip their toes into game-development. These tools thin the barrier between individual game developers and the mainstream game market. That is why MeowTillery was developed: to bring an interesting concept in the form of another indie game. In MeowTillery, however, you get to play the- debatable- antagonist of the story.
+
+Project Overview:
+MeowTillery is a 2D pixel RPG created with GD-Script with C# and C++ integrations. You (the player) play as Squango, a curious and inventive person with a questionable  moral-compass. You go through an intro quip that has a short synopsis of Squango's life and the story events that brought you to the first playable scene. You are able to feed and- eventually- weaponize the cats in a cat cafe. The weapons unlock different damage levels and different waves of enemies. The enemies (hostile NPCs) of the world are from a strange organization called "PYTA," and are adament about closing down your cat bio-engineered artillery. As the player, your main objective is to keep your bio-engineering of the cats into weapons uninturrupted by fighting off the waves.
+
+Features:
+I want to move the character. As a player, I want the character to have fluid controls and alternative controls for the movements (keybinds LRUD & WASD).
+Hostile characters. As I am playing the game, I want to have consistent battle with hostile NPCs so the game does not get boring.
+As a player, I want to be able to easily access items, so that I can quickly switch between items and equip them quickly.
+As a developer, I want to have multiple cohesive systems, so I want a fully integrated and standardized inventory system for easy updates.
+As a player, I want to be able to equip items, so that I can use them.
+As a player, I want to be able to equip clothing and armors, so that I can customize my appearance or add greater protection.
+As a player, I want to be able to interact with the cats, so that I can become invested as a cat cafe manager.
+As a developer, I want the player to interact with the cats, so that they may confront moral conflicts and dilemmas when changing cats into weapons, so that they may get further interested in the game and setting.
+Technologies to be used:
+The project will make extensive use of Godot as the main programming language. It will also utilize JSON for managing what items exist in-game. It will also utilize functions from Godot extended libraries as a way to add GitHub Integration. 
