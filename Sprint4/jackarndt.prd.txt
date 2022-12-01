@@ -20,5 +20,5 @@ Features
 7. As a developer, I don't want the player to be able to exit the battle stage at will
 8. As a developer, I don't want the player to find easy exploits by reaching out of bounds areas
 
-## Technologies to be used
+Technologies to be used
 The game development software Godot will be used to implement this project. It uses a similar language to Python in order to create playable worlds.
