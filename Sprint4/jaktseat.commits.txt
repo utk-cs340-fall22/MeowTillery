@@ -1,0 +1,245 @@
+
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500  26) var stateW = "none"
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500  27) var stateW2 = "none"
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500  28) ## stateW: either "gun" or "sword" or "none"
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500  29) ## stateW2: either "ACat" or "MeowchineGun" or "Catana" or "Catlass" or "none"
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500  87) 	if(stateW == "gun"):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500  88) 		_shoot()
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500  89) 		
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500  90) 	if(stateW == "sword"):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500  91) 		_stab()
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 120) 	elif(stateW == "gun" and stateW2 == "ACat"):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 121) 		if(Input.is_action_just_pressed("mv_jump")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 122) 			sprite.play("jump+ACat-47")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 123) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 124) 		elif(Input.is_action_pressed("mv_right") or Input.is_action_pressed("mv_left")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 125) 			sprite.play("run+ACat47")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 126) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 127) 		elif(Input.is_action_just_released("mv_right") or Input.is_action_just_released("mv_left")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 128) 			sprite.play("idle+ACat-47")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 129) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 130) 		if(xVelocity == 0 and yVelocity <= 5):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 131) 			sprite.play("idle+ACat-47")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 132) 			
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 133) 	elif(stateW == "gun" and stateW2 == "MeowchineGun"):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 134) 		if(Input.is_action_just_pressed("mv_jump")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 135) 			sprite.play("jump+meowchinegun")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 136) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 137) 		elif(Input.is_action_pressed("mv_right") or Input.is_action_pressed("mv_left")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 138) 			sprite.play("run+meowchinegun")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 139) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 140) 		elif(Input.is_action_just_released("mv_right") or Input.is_action_just_released("mv_left")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 141) 			sprite.play("idle+meowchinegun")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 142) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 143) 		if(xVelocity == 0 and yVelocity <= 5):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 144) 			sprite.play("idle+meowchinegun")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 145) 	
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 146) 	elif(stateW == "sword" and stateW2 == "Catana"):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 147) 		if(Input.is_action_just_pressed("mv_jump")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 148) 			sprite.play("jump+catana")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 149) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 150) 		elif(Input.is_action_pressed("mv_right") or Input.is_action_pressed("mv_left")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 151) 			sprite.play("run+catana")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 152) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 153) 		elif(Input.is_action_just_released("mv_right") or Input.is_action_just_released("mv_left")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 154) 			sprite.play("idle+catana")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 155) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 156) 		if(xVelocity == 0 and yVelocity <= 5):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 157) 			sprite.play("idle+catana")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 158) 			
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 159) 	elif(stateW == "sword" and stateW2 == "Catlass"):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 160) 		if(Input.is_action_just_pressed("mv_jump")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 161) 			sprite.play("jump+catlass")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 162) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 163) 		elif(Input.is_action_pressed("mv_right") or Input.is_action_pressed("mv_left")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 164) 			sprite.play("run+catlass")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 165) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 166) 		elif(Input.is_action_just_released("mv_right") or Input.is_action_just_released("mv_left")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 167) 			sprite.play("idle+catlass")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 168) 			return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 169) 		if(xVelocity == 0 and yVelocity <= 5):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 170) 			sprite.play("idle+catlass")
+6f8e082d (Jake Seaton             2022-11-09 23:08:29 -0500 171) 
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 182) func _stab():
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 183) 	
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 184) 	return
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 185) 
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 186) func _shoot():
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 187) 	if(stateW2 == "ACat" and Input.is_action_just_pressed("shoot")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 188) 		sprite.play("hit+ACat-47")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 189) 		var projectileACat = preload("res://ACatProjectile.tscn")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 190) 		var projInstanceACat = projectileACat.instance()
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 191) 		get_tree().get_root().add_child(projInstanceACat)
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 192) 		
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 193) 		if(lookingRight == true):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 194) 			projInstanceACat.global_position.x = global_position.x + 50
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 195) 			projInstanceACat.global_position.y = global_position.y
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 196) 			projInstanceACat.movement = Vector2(1, 0)
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 197) 		if(lookingRight == false):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 198) 			projInstanceACat.global_position.x = global_position.x - 50
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 199) 			projInstanceACat.global_position.y = global_position.y
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 200) 			projInstanceACat.movement = Vector2(-1, 0)
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 201) 		yield(get_tree().create_timer(0.5), "timeout")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 202) 			
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 203) 			
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 204) 	if(stateW2 == "MeowchineGun" and Input.is_action_pressed("shoot")):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 205) 		sprite.play("hit+meowchinegun")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 206) 		var projectileACat = preload("res://MeowchineGunProjectile.tscn")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 207) 		var projInstanceACat = projectileACat.instance()
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 208) 		if(spacer > 5):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 209) 			get_tree().get_root().add_child(projInstanceACat)
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 210) 			if(lookingRight == true):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 211) 				projInstanceACat.global_position.x = global_position.x + 50
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 212) 				projInstanceACat.global_position.y = global_position.y
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 213) 				projInstanceACat.movement = Vector2(1, 0)
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 214) 			if(lookingRight == false):
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 215) 				projInstanceACat.global_position.x = global_position.x - 50
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 216) 				projInstanceACat.global_position.y = global_position.y
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 217) 				projInstanceACat.movement = Vector2(-1, 0)
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 218) 			yield(get_tree().create_timer(0.5), "timeout")
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 219) 			spacer = 0
+f73fa897 (Jake Seaton             2022-11-30 20:15:16 -0500 220) 		spacer = spacer + 1
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 1) extends Area2D
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 2) 
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 3) export var damage = 25
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  1) extends KinematicBody2D
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  2) 
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  3) var movement = Vector2()
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  4) const SPEED = 1500
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  5) export var damage = 34
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  6) func _physics_process(delta):
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  7) 	var collision = move_and_collide(movement * SPEED * delta)
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  8) 	if collision:
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  9) 		if collision.collider.name == "Player":
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 10) 			collision.collider._die()
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 11) 		if collision.collider.name != "Player":
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 12) 			queue_free()
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 13) 		queue_free()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  1) extends KinematicBody2D
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  2) 
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  3) const MOVE_SPEED = 150
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  4) const ACC = 80
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  5) const JUMP_FORCE = 1000
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  6) const GRAVITY = 50
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  7) const TERMINAL_VELOCITY = 1000
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  8) const RANGE = 100
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  9) 
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 10) onready var sprite = $AnimatedSprite
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 11) var projectile = preload("res://CafeOwnerProjectile.tscn")
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 12) var direction = Vector2(0,0)
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 13) var lookingRight = true
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 14) var player = null
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 15) var yVelocity = 0
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 16) var xVelocity = 0
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 17) var inRange = false
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 18) var hasAttacked = 0
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 19) 
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 20) func _physics_process(delta):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 21) 	if(player == null):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 22) 		return
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 23) 		
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 24) 	if (inRange == true):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 25) 		xVelocity = 0
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 26) 		if(hasAttacked == 0):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 27) 			hasAttacked = 1
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 28) 			_attack()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 29) 		elif(hasAttacked == 1):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 30) 			yield(get_tree().create_timer(0.7), "timeout")
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 31) 			hasAttacked = 0
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 32) 			
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 33) 			
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 34) 	if(global_position.distance_to(player.global_position) > RANGE):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 35) 		inRange = false
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 36) 		
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 37) 	if (inRange == false):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 38) 		_move()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 39) 	_animate()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 40) 	
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 41) func _attack():
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 42) 	var projInstance = projectile.instance()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 43) 	get_tree().get_root().add_child(projInstance)
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 44) 	var dirToPlayer = (player.global_position - global_position).normalized()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 45) 	if(dirToPlayer.x > 0):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 46) 		projInstance.global_position.x = global_position.x + 25
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 47) 		projInstance.global_position.y = global_position.y - 5
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 48) 	if(dirToPlayer.x < 0):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 49) 		projInstance.global_position.x = global_position.x - 25
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 50) 		projInstance.global_position.y = global_position.y - 5
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 51) 	projInstance.movement = dirToPlayer
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 52) 	return
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 53) 	
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 54) func _move():
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 55) 	if(global_position.distance_to(player.global_position) <= RANGE):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 56) 		inRange = true
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 57) 		
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 58) 	direction = position.direction_to(player.position)
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 59) 	
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 60) 	if(lookingRight and xVelocity <= 0):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 61) 		flip()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 62) 	if(!lookingRight and xVelocity >= 0):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 63) 		flip()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 64) 	
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 65) 	if(direction.x >= 0):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 66) 		xVelocity = min(xVelocity + ACC, MOVE_SPEED)
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 67) 	if(direction.x <= 0):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 68) 		xVelocity = max(xVelocity - ACC, -MOVE_SPEED)
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 69) 		
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 70) 	move_and_slide(Vector2(xVelocity, yVelocity), Vector2(0, -1))
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 71) 	xVelocity = lerp(xVelocity,0,0.15)
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 72) 		
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 73) 	yVelocity += GRAVITY
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 74) 	if(yVelocity > TERMINAL_VELOCITY):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 75) 		yVelocity = TERMINAL_VELOCITY
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 76) 
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 77) func _animate():
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 78) 	if(xVelocity > 0):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 79) 		sprite.play("Walk")
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 80) 	elif(xVelocity < 0):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 81) 		sprite.play("Walk")
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 82) 	elif(global_position.distance_to(player.global_position) <= RANGE):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 83) 		sprite.play("Attack")
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 84) 	else:
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 85) 		sprite.play("Idle")
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 86) 		
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 87) func _die():
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 88) 	queue_free()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 89) 	
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 90) func flip():
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 91) 	lookingRight = !lookingRight
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 92) 	sprite.flip_h = !sprite.flip_h
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 93) 	
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 94) func set_player(p):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 95) 	player = p	
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 96) 		
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  1) extends KinematicBody2D
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  2) 
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  3) var movement = Vector2()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  4) const SPEED = 1
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  5) export var damage = 2
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  6) func _physics_process(delta):
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  7) 	var collision = move_and_collide(movement * SPEED * delta)
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  8) 	if collision:
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500  9) 		if collision.collider.name == "Player":
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 10) 			collision.collider._die()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 11) 		queue_free()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 12) 	else:
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 13) 		queue_free()
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 1) extends Area2D
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 2) 
+f2cd2224 (Jake Seaton 2022-11-29 17:29:10 -0500 3) export var damage = 2
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 1) extends Area2D
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 2) 
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 3) export var damage = 5
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  1) extends KinematicBody2D
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  2) 
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  3) var movement = Vector2()
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  4) const SPEED = 1500
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  5) export var damage = 10
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  6) func _physics_process(delta):
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  7) 	var collision = move_and_collide(movement * SPEED * delta)
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  8) 	if collision:
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500  9) 		if collision.collider.name == "Player":
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 10) 			collision.collider._die()
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 11) 		if collision.collider.name != "Player":
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 12) 			queue_free()
+f73fa897 (Jake Seaton 2022-11-30 20:15:16 -0500 13) 		queue_free()
