@@ -1,0 +1,314 @@
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500  5) 	'You are now sleeping.'
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 12) var sleeping = false
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 13) var sleepCount = 0
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 14) var flipped = false
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 15) 
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 16) onready var Squa = get_parent().get_parent().get_parent().get_node("Squango")
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 28) 			sleeping = true
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 30) 	
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 31) 	if(sleeping):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 32) 		get_parent().get_parent().get_parent().get_node("Squango/Sprite").play("Sleep")
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 33) 		if(Squa.lookingRight and flipped == false):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 34) 			Squa.lookingRight = !Squa.lookingRight
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 35) 			Squa.position = Vector2(527,340)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 36) 			Squa.scale = Vector2(1.6,1.6)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 37) 			flipped = true
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 38) 		if(Input.is_action_just_pressed("mv_left") || Input.is_action_just_pressed("mv_right") || Input.is_action_just_pressed("mv_jump")):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 39) 			sleeping = false
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 40) 			Squa.lookingRight = !Squa.lookingRight
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 41) 			flipped = false
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 42) 			Squa.scale = Vector2(3.01495,3.01495)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 43) 		if(sleepCount > 50):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 44) 			PlayerStat._set_health(PlayerStat.health + 1)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 45) 			sleepCount=0
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 46) 		else:
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 47) 			sleepCount+=1
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 48) 	
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  1) extends Control
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  2) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  3) onready var health_bar = $BossHealth
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  4) #onready var Rstats = 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  5) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  6) #func _ready():
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  7) #	Rstats.connect("health_updated", self, "_health_update")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  8) #	_health_update(Rstats.health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  9) 	
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 10) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 11) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 12) func _max_health_update(max_health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 13) 	health_bar.max_value = max_health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 14) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 15) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 16) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 17) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 18) func _on_Ingrid_Stats_health_updated(health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 19) 	health_bar.value = health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  1) extends Control
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  2) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  3) onready var health_bar = $Health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  4) #onready var Rstats = 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  5) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  6) #func _ready():
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  7) #	Rstats.connect("health_updated", self, "_health_update")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  8) #	_health_update(Rstats.health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  9) 	
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 10) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 11) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 12) func _max_health_update(max_health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 13) 	health_bar.max_value = max_health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 14) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 15) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 16) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 17) func _on_Charger_Stats_health_updated(health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 18) 	health_bar.value = health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  1) extends Node
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  2) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  3) signal health_updated(health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  4) signal killed()
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  5) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  6) export (float) var max_health = 100
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  7) onready var health = max_health setget _set_health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  8) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  9) func _set_health(value):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 10) 	var prev_health = health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 11) 	health = clamp(value,0,max_health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 12) 	if health != prev_health:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 13) 		emit_signal("health_updated",health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 14) 		if health <= 0:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 15) 			emit_signal("killed")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  1) extends RichTextLabel
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  2) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  3) var curHealth = 100
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  4) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  5) export (Color,RGB) var text_color
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  6) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  7) func _ready():
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  8) 	set_modulate(text_color)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  9) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 10) func _process(delta):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 11) 	
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 12) 	curHealth = get_parent().value
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 13) 	#if $CurHealth != null:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 14) 	self.text=str(curHealth) + "/100"
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 15) 	
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 16) 	
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 16) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 17) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 18) func _on_Minion_Stats_health_updated(health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 19) 	pass # Replace with function body.
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  1) extends Control
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  2) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  3) onready var health_bar = $Health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  4) #onready var Rstats = 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  5) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  6) #func _ready():
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  7) #	Rstats.connect("health_updated", self, "_health_update")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  8) #	_health_update(Rstats.health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  9) 	
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 10) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 11) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 12) func _max_health_update(max_health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 13) 	health_bar.max_value = max_health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 14) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 15) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 16) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 17) func _on_Ingrid_Stats_health_updated(health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 18) 	health_bar.value = health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  1) extends Node
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  2) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  3) signal health_updated(health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  4) signal killed()
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  5) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  6) export (float) var max_health = 100
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  7) onready var health = max_health setget _set_health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  8) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  9) func _set_health(value):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 10) 	var prev_health = health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 11) 	health = clamp(value,0,max_health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 12) 	if health != prev_health:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 13) 		emit_signal("health_updated",health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 14) 		if health <= 0:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 15) 			emit_signal("killed")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  15) const invincibility_duration = 0.5
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  16) onready var Cstats = $Charger_Stats
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  17) onready var hurtbox = $RHurtbox
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  18) onready var blinker = $Blinker
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  19) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  22) 	Cstats.connect("killed", self, "_die")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  23) 	#$HealthBar/Health.fill_mode = 0
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  53) 		if($HealthBar/Health.fill_mode == 1):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  54) 			$HealthBar/Health.fill_mode = 0
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  55) 		else:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  56) 			$HealthBar/Health.fill_mode = 1
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  57) 		
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  64) 		$HealthBar/Health.fill_mode = 0
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  67) 		$HealthBar/Health.fill_mode = 1
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  76) func _die():
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  77) 	queue_free()
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  78) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  86) 			$HealthBar/Health.fill_mode = 1
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  90) 			$HealthBar/Health.fill_mode = 0
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 101) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 102) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 103) func _on_RHurtbox_area_entered(area):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 104) 	if (area.name == "Hurtbox"):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 105) 		if area.damage != 0 and Cstats.health > 0:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 106) 			if !hurtbox.is_invincible:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 107) 				blinker.start_blinking(self, invincibility_duration)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 108) 				hurtbox.start_invincibility(invincibility_duration)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 109) 				Cstats.health-=area.damage
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  1) extends Control
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  2) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  3) onready var health_bar = $Health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  4) #onready var Rstats = 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  5) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  6) #func _ready():
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  7) #	Rstats.connect("health_updated", self, "_health_update")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  8) #	_health_update(Rstats.health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  9) 	
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 10) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 11) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 12) func _max_health_update(max_health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 13) 	health_bar.max_value = max_health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 14) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 15) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 16) func _on_Minion_Stats_health_updated(health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 17) 	health_bar.value = health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  1) extends Control
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  2) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  3) onready var health_bar = $MiniBossHealth
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  4) #onready var Rstats = 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  5) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  6) #func _ready():
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  7) #	Rstats.connect("health_updated", self, "_health_update")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  8) #	_health_update(Rstats.health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  9) 	
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 10) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 11) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 12) func _max_health_update(max_health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 13) 	health_bar.max_value = max_health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 14) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 15) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 16) func _on_Robert_Scrum_Stats_health_updated(health):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 17) 	health_bar.value = health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  1) extends Node
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  2) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  3) signal health_updated(health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  4) signal killed()
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  5) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  6) export (float) var max_health = 100
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  7) onready var health = max_health setget _set_health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  8) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  9) func _set_health(value):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 10) 	var prev_health = health
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 11) 	health = clamp(value,0,max_health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 12) 	if health != prev_health:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 13) 		emit_signal("health_updated",health)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 14) 		if health <= 0:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 15) 			emit_signal("killed")
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  1) extends KinematicBody2D
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  2) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  3) export var damage = 0
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  4) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  5) var motion = Vector2()
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  6) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  7) #const GRAVITY = 50
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  8) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  9) func _physics_process(delta):
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 10) 	motion.y += 10
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 11) 	move_and_slide(motion)
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 12) 
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 13) 
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 14) """
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 15) func _on_PtArea_body_entered(body):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 16) 	if(body.name != "Squango"):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 17) 		self.get_node("CollisionShape2D").set_deferred("disabled", true)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 18) 		self.get_node("PtArea/CollisionShape2D").set_deferred("disabled", true)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 19) 
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 20) 
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 21) func _on_PtArea_body_exited(body):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 22) 	if(body.name != "Squango"):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 23) 		self.get_node("CollisionShape2D").set_deferred("disabled", false)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 24) 		self.get_node("PtArea/CollisionShape2D").set_deferred("disabled", false)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 25) """
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 26) 
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 27) """func _on_PtArea_area_entered(area):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 28) 	if(area.name != "Hurtbox"):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 29) 		self.get_node("CollisionShape2D").set_deferred("disabled", true)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 30) 		self.get_node("PtArea/CollisionShape2D").set_deferred("disabled", true)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 31) 
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 32) 
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 33) func _on_PtArea_area_exited(area):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 34) 	if(area.name != "Squango"):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 35) 		self.get_node("CollisionShape2D").set_deferred("disabled", false)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 36) 		self.get_node("PtArea/CollisionShape2D").set_deferred("disabled", false)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 37) """
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 1) extends Area2D
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 2) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 3) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 4) export var damage = 0
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  1) extends Timer
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  2) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  3) var pt = preload("res://Padthai.tscn")
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500  4) export var ptCount=0
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  5) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  6) func _ready():
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  7) 	pass # Replace with function body.
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  8) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500  9) 
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 10) func _on_Padthai_Timer_timeout():
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 11) 	if(ptCount < 3):
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 12) 		var pt1 = pt.instance()
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 13) 		pt1.position = Vector2(rand_range(-200,750), 160)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 14) 		add_child(pt1)
+0898d980 (Sean Kerzel 2022-11-29 00:20:44 -0500 15) 		ptCount +=1
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  74) 			
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  86) 		#if($HealthBar/Health.fill_mode == 1):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  87) 		#	$HealthBar/Health.fill_mode = 0
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  88) 		#else:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  89) 		#	$HealthBar/Health.fill_mode = 1
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 124) 	if (area.name == "Hurtbox"):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 125) 		if area.damage != 0 and Rstats.health > 0:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 126) 			if !hurtbox.is_invincible:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 127) 				blinker.start_blinking(self, invincibility_duration)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 128) 				hurtbox.start_invincibility(invincibility_duration)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 129) 				Rstats.health-=area.damage
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 15) 		PlayerStat._set_sanity(PlayerStat.sanity-1)
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 20) 	if(get_tree().get_current_scene().get_name() == "bedroom_scene"):
+4120cb6d (Sean Kerzel 2022-11-17 00:39:55 -0500 21) 		PlayerStat._set_sanity(PlayerStat.sanity+1)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  14) var BB = preload("res://BossBar.tscn")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  15) var MBB = preload("res://MiniBossBar.tscn")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  95) 			var TheMiniBossBar = MBB.instance()
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  96) 			
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 104) 			TheMiniBossBar.rect_position = Vector2(400,480)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 119) 			
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 120) 			get_parent().get_node("HUD").get_node("Interface").add_child(TheMiniBossBar)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 121) 			robert.get_node("Robert_Scrum_Stats").connect("health_updated",TheMiniBossBar, "_on_Robert_Scrum_Stats_health_updated")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 122) 			robert.get_node("Robert_Scrum_Stats").connect("killed", TheMiniBossBar, "queue_free")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 123) 			
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 216) 			var TheBossBar = BB.instance()
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 219) 			TheBossBar.rect_position = Vector2(400,480)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 222) 			get_parent().get_node("HUD").get_node("Interface").add_child(TheBossBar)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 223) 			TheIngrid.get_node("Ingrid_Stats").connect("health_updated",TheBossBar, "_on_Ingrid_Stats_health_updated")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 224) 			TheIngrid.get_node("Ingrid_Stats").connect("killed", TheBossBar, "queue_free")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  15) const invincibility_duration = 0.5
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  16) onready var Mstats = $Minion_Stats
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  17) onready var hurtbox = $RHurtbox
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  18) onready var blinker = $Blinker
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  19) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  22) 	Mstats.connect("killed", self, "_die")
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  61) 		$HealthBar/Health.fill_mode = 1
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  65) 		$HealthBar/Health.fill_mode = 0
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  74) func _die():
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  75) 	queue_free()
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  76) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  92) 		queue_free()
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  93) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  94) 
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  95) func _on_RHurtbox_area_entered(area):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  96) 	if (area.name == "Hurtbox"):
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  97) 		if area.damage != 0 and Mstats.health > 0:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  98) 			if !hurtbox.is_invincible:
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500  99) 				blinker.start_blinking(self, invincibility_duration)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 100) 				hurtbox.start_invincibility(invincibility_duration)
+a01560d4 (Sean Kerzel 2022-11-28 21:51:11 -0500 101) 				Mstats.health-=area.damage
